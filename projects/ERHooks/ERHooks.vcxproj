@@ -106,6 +106,7 @@
     <ClCompile Include="src\app\core\main\input.cpp" />
     <ClCompile Include="src\app\core\main\menu.cpp" />
     <ClCompile Include="src\app\core\main\renderer.cpp" />
+    <ClCompile Include="src\app\game\elden_ring\elden_ring_graces.cpp" />
     <ClCompile Include="src\app\game\elden_ring\elden_ring_items.cpp" />
     <ClCompile Include="src\app\shared\libs\imgui\imgui.cpp" />
     <ClCompile Include="src\app\shared\libs\imgui\imgui_demo.cpp" />
@@ -120,6 +121,7 @@
     <ClCompile Include="src\app\shared\libs\minhook\hook.cpp" />
     <ClCompile Include="src\app\shared\libs\minhook\trampoline.cpp" />
     <ClCompile Include="src\app\shared\utils\log.cpp" />
+    <ClCompile Include="src\app\shared\utils\utilfuncs.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\app\shared\utils\memaddr.cpp" />
     <ClCompile Include="src\app\shared\utils\memutils.cpp" />
@@ -130,6 +132,7 @@
     <ClInclude Include="src\app\core\main\input.hpp" />
     <ClInclude Include="src\app\core\main\menu.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_bin.hpp" />
+    <ClInclude Include="src\app\game\elden_ring\elden_ring_graces.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_items.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_types.hpp" />
     <ClInclude Include="src\app\game\game.hpp" />
@@ -158,6 +161,7 @@
     <ClInclude Include="src\app\shared\utils\memaddr.hpp" />
     <ClInclude Include="src\app\shared\utils\memutils.hpp" />
     <ClInclude Include="src\app\shared\shared.hpp" />
+    <ClInclude Include="src\app\shared\utils\utilfuncs.hpp" />
     <ClInclude Include="src\app\shared\utils\vec.hpp" />
   </ItemGroup>
   <ItemGroup>

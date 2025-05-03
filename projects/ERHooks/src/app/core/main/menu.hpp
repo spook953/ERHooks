@@ -14,10 +14,12 @@ public:
 private:
 	static void AttributeEditor();
 	static void ItemSpawner(const er::ItemType item_type, const er::items::item_map_t &items);
+	static void EventFlagEditor(const std::map<uint32_t, std::string> &flags);
 
 private:
 	static void PlayerTab();
 	static void ItemsTab();
+	static void ProgressionTab();
 
 private:
 	static void MainWindow();

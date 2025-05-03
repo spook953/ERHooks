@@ -107,3 +107,42 @@ MAKE_ADDR
 
 	.Rip(1)
 );
+
+
+MAKE_ADDR
+(
+	er::bin,
+
+	EventFlagMan,
+
+	MemUtils::FindPatMod(
+		"eldenring.exe",
+		"48 8B 1D ? ? ? ? 49 8B F0 48 8B F9"
+	)
+
+	.Rip(3).Deref()
+);
+
+MAKE_ADDR
+(
+	er::bin,
+
+	EventFlagMan_SetFlag,
+
+	MemUtils::FindPatMod(
+		"eldenring.exe",
+		"48 89 5C 24 ? 44 8B 49 1C"
+	)
+);
+
+MAKE_ADDR
+(
+	er::bin,
+
+	EventFlagMan_GetFlag,
+
+	MemUtils::FindPatMod(
+		"eldenring.exe",
+		"44 8B 41 1C 44 8B DA"
+	)
+);

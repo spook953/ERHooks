@@ -1,0 +1,485 @@
+#include "elden_ring_graces.hpp"
+
+namespace er::graces
+{
+	static grace_map_t grace_map{};
+
+	const grace_map_t &GetGraceMap() { return grace_map; }
+}
+
+// BonfireWarpParam.txt
+static auto er_graces_init_grace_map = [&]() -> bool
+{
+	er::graces::grace_map[76860] = "[Abyssal Woods] Abyssal Woods";
+	er::graces::grace_map[76864] = "[Abyssal Woods] Church Ruins";
+	er::graces::grace_map[76861] = "[Abyssal Woods] Divided Falls";
+	er::graces::grace_map[76862] = "[Abyssal Woods] Forsaken Graveyard";
+	er::graces::grace_map[76863] = "[Abyssal Woods] Woodland Trail";
+
+	er::graces::grace_map[71402] = "[Academy of Raya Lucaria] Church of the Cuckoo";
+	er::graces::grace_map[71401] = "[Academy of Raya Lucaria] Debate Parlor";
+	er::graces::grace_map[71400] = "[Academy of Raya Lucaria] Raya Lucaria Grand Library";
+	er::graces::grace_map[71403] = "[Academy of Raya Lucaria] Schoolhouse Classroom";
+
+	er::graces::grace_map[71214] = "[Ainsel River Main] Ainsel River Main";
+	er::graces::grace_map[71219] = "[Ainsel River Main] Nokstella Waterfall Basin";
+	er::graces::grace_map[71215] = "[Ainsel River Main] Nokstella, Eternal City";
+	er::graces::grace_map[71213] = "[Ainsel River] Ainsel River Downstream";
+	er::graces::grace_map[71212] = "[Ainsel River] Ainsel River Sluice Gate";
+	er::graces::grace_map[71211] = "[Ainsel River] Ainsel River Well Depths";
+	er::graces::grace_map[71240] = "[Ainsel River] Astel, Naturalborn of the Void";
+	er::graces::grace_map[71210] = "[Ainsel River] Dragonkin Soldier of Nokstella";
+
+	er::graces::grace_map[76300] = "[Altus Plateau] Abandoned Coffin";
+	er::graces::grace_map[76303] = "[Altus Plateau] Altus Highway Junction";
+	er::graces::grace_map[76301] = "[Altus Plateau] Altus Plateau";
+	er::graces::grace_map[73205] = "[Altus Plateau] Altus Tunnel";
+	er::graces::grace_map[76306] = "[Altus Plateau] Bower of Bounty";
+	er::graces::grace_map[76322] = "[Altus Plateau] Castellan's Hall";
+	er::graces::grace_map[76302] = "[Altus Plateau] Erdtree,Gazing Hill";
+	er::graces::grace_map[76304] = "[Altus Plateau] Forest,Spanning Greatbridge";
+	er::graces::grace_map[73204] = "[Altus Plateau] Old Altus Tunnel";
+	er::graces::grace_map[73118] = "[Altus Plateau] Perfumer's Grotto";
+	er::graces::grace_map[76305] = "[Altus Plateau] Rampartside Path";
+	er::graces::grace_map[76307] = "[Altus Plateau] Road of Iniquity Side Path";
+	er::graces::grace_map[73119] = "[Altus Plateau] Sage's Cave";
+	er::graces::grace_map[73008] = "[Altus Plateau] Sainted Hero's Grave";
+	er::graces::grace_map[76320] = "[Altus Plateau] Shaded Castle Ramparts";
+	er::graces::grace_map[76321] = "[Altus Plateau] Shaded castle Inner Gate";
+	er::graces::grace_map[73012] = "[Altus Plateau] Unsightly Catacombs";
+	er::graces::grace_map[76313] = "[Altus Plateau] Windmill Heights";
+	er::graces::grace_map[76308] = "[Altus Plateau] Windmill Village";
+
+	er::graces::grace_map[76944] = "[Ancient Ruins of Rauh] Ancient Ruins, Grand Stairway";
+	er::graces::grace_map[76945] = "[Ancient Ruins of Rauh] Church of the Bud";
+	er::graces::grace_map[76943] = "[Ancient Ruins of Rauh] Church of the Bud, Main Entrance";
+	er::graces::grace_map[76941] = "[Ancient Ruins of Rauh] Rauh Ancient Ruins, East";
+	er::graces::grace_map[76942] = "[Ancient Ruins of Rauh] Rauh Ancient Ruins, West";
+	er::graces::grace_map[76940] = "[Ancient Ruins of Rauh] Viaduct Minor Tower";
+
+	er::graces::grace_map[76208] = "[Bellum Highway] Bellum Church";
+	er::graces::grace_map[76240] = "[Bellum Highway] Church of Inhibition";
+	er::graces::grace_map[76207] = "[Bellum Highway] East Raya Lucaria Gate";
+	er::graces::grace_map[76239] = "[Bellum Highway] Frenzied Flame Village Outskirts";
+
+	er::graces::grace_map[72001] = "[Belurat, Tower Settlement] Belurat, Tower Settlement";
+	er::graces::grace_map[72002] = "[Belurat, Tower Settlement] Small Private Altar";
+	er::graces::grace_map[72003] = "[Belurat, Tower Settlement] Stagefront";
+	er::graces::grace_map[72000] = "[Belurat, Tower Settlement] Theatre of the Divine Beast";
+
+	er::graces::grace_map[73120] = "[Caelid] Abandoned Cave";
+	er::graces::grace_map[76403] = "[Caelid] Caelem Ruins";
+	er::graces::grace_map[73015] = "[Caelid] Caelid Catacombs";
+	er::graces::grace_map[76405] = "[Caelid] Caelid Highway South";
+	er::graces::grace_map[76404] = "[Caelid] Cathedral of Dragon Communion";
+	er::graces::grace_map[76415] = "[Caelid] Chair,Crypt of Sellia";
+	er::graces::grace_map[76420] = "[Caelid] Chamber Outside the Plaza";
+	er::graces::grace_map[76418] = "[Caelid] Church of the Plague";
+	er::graces::grace_map[76410] = "[Caelid] Deep Siofra Well";
+	er::graces::grace_map[76402] = "[Caelid] Fort Gael North";
+	er::graces::grace_map[73207] = "[Caelid] Gael Tunnel";
+	er::graces::grace_map[73121] = "[Caelid] Gaol Cave";
+	er::graces::grace_map[76417] = "[Caelid] Impassable Greatbridge";
+	er::graces::grace_map[73014] = "[Caelid] Minor Erdtree Catacombs";
+	er::graces::grace_map[73257] = "[Caelid] Rear Gael Tunnel Entrance";
+	er::graces::grace_map[76419] = "[Caelid] Redmane Castle Plaza";
+	er::graces::grace_map[76401] = "[Caelid] Rotview Balcony";
+	er::graces::grace_map[76414] = "[Caelid] Sellia Backstreets";
+	er::graces::grace_map[73208] = "[Caelid] Sellia Crystal Tunnel";
+	er::graces::grace_map[76416] = "[Caelid] Sellia Under,Stair";
+	er::graces::grace_map[76400] = "[Caelid] Smoldering Church";
+	er::graces::grace_map[76409] = "[Caelid] Smoldering Wall";
+	er::graces::grace_map[76411] = "[Caelid] Southern Aeonia Swamp Bank";
+	er::graces::grace_map[76422] = "[Caelid] Starscourge Radahn";
+	er::graces::grace_map[73016] = "[Caelid] War,Dead Catacombs";
+
+	er::graces::grace_map[73010] = "[Capital Outskirts] Auriza Hero's Grave";
+	er::graces::grace_map[73013] = "[Capital Outskirts] Auriza Side Tomb";
+	er::graces::grace_map[76314] = "[Capital Outskirts] Capital Rampart";
+	er::graces::grace_map[73430] = "[Capital Outskirts] Divine Tower of West Altus";
+	er::graces::grace_map[73432] = "[Capital Outskirts] Divine Tower of West Altus: Gate";
+	er::graces::grace_map[76311] = "[Capital Outskirts] Hermit Merchant's Shack";
+	er::graces::grace_map[76310] = "[Capital Outskirts] Minor Erdtree Church";
+	er::graces::grace_map[76312] = "[Capital Outskirts] Outer Wall Battleground";
+	er::graces::grace_map[76309] = "[Capital Outskirts] Outer Wall Phantom Tree";
+	er::graces::grace_map[73431] = "[Capital Outskirts] Sealed Tunnel";
+
+	er::graces::grace_map[76821] = "[Castle Ensis] Castle Ensis Checkpoint";
+	er::graces::grace_map[76822] = "[Castle Ensis] Castle,Lord's Chamber";
+	er::graces::grace_map[76823] = "[Castle Ensis] Ensis Moongazing Grounds";
+
+	er::graces::grace_map[76831] = "[Cerulean Coast] Cerulean Coast";
+	er::graces::grace_map[76835] = "[Cerulean Coast] Cerulean Coast Cross";
+	er::graces::grace_map[76832] = "[Cerulean Coast] Cerulean Coast West";
+	er::graces::grace_map[76834] = "[Cerulean Coast] Finger Ruins of Rhia";
+	er::graces::grace_map[76833] = "[Cerulean Coast] The Fissure";
+
+	er::graces::grace_map[76841] = "[Charo's Hidden Grave] Charo's Hidden Grave";
+	er::graces::grace_map[74102] = "[Charo's Hidden Grave] Lamenter's Gaol";
+
+	er::graces::grace_map[76653] = "[Consecrated Snowfield] Apostate Derelict";
+	er::graces::grace_map[73112] = "[Consecrated Snowfield] Cave of the Forlorn";
+	er::graces::grace_map[76550] = "[Consecrated Snowfield] Consecrated Snowfield";
+	er::graces::grace_map[73019] = "[Consecrated Snowfield] Consecrated Snowfield Catacombs";
+	er::graces::grace_map[76551] = "[Consecrated Snowfield] Inner Consecrated Snowfield";
+	er::graces::grace_map[76652] = "[Consecrated Snowfield] Ordina, Liturgical Town";
+	er::graces::grace_map[73211] = "[Consecrated Snowfield] Yelough Anix Tunnel";
+
+	er::graces::grace_map[71310] = "[Crumbling Farum Azula] Beside the Great Bridge";
+	er::graces::grace_map[71303] = "[Crumbling Farum Azula] Crumbling Beast Grave";
+	er::graces::grace_map[71304] = "[Crumbling Farum Azula] Crumbling Beast Grave Depths";
+	er::graces::grace_map[71306] = "[Crumbling Farum Azula] Dragon Temple";
+	er::graces::grace_map[71302] = "[Crumbling Farum Azula] Dragon Temple Altar";
+	er::graces::grace_map[71308] = "[Crumbling Farum Azula] Dragon Temple Lift";
+	er::graces::grace_map[71309] = "[Crumbling Farum Azula] Dragon Temple Rooftop";
+	er::graces::grace_map[71307] = "[Crumbling Farum Azula] Dragon Temple Transept";
+	er::graces::grace_map[71301] = "[Crumbling Farum Azula] Dragonlord Placidusax";
+	er::graces::grace_map[71300] = "[Crumbling Farum Azula] Maliketh, the Black Blade";
+	er::graces::grace_map[71305] = "[Crumbling Farum Azula] Tempest,Facing Balcony";
+
+	er::graces::grace_map[71235] = "[Deeproot Depths] Across the Roots";
+	er::graces::grace_map[71233] = "[Deeproot Depths] Deeproot Depths";
+	er::graces::grace_map[71232] = "[Deeproot Depths] Great Waterfall Crest";
+	er::graces::grace_map[71230] = "[Deeproot Depths] Prince of Death's Throne";
+	er::graces::grace_map[71231] = "[Deeproot Depths] Root,Facing Cliffs";
+	er::graces::grace_map[71234] = "[Deeproot Depths] The Nameless Eternal City";
+
+	er::graces::grace_map[71503] = "[Elphael, Brace of the Haligtree] Drainage Channel";
+	er::graces::grace_map[71502] = "[Elphael, Brace of the Haligtree] Elphael Inner Wall";
+	er::graces::grace_map[71504] = "[Elphael, Brace of the Haligtree] Haligtree Roots";
+	er::graces::grace_map[71500] = "[Elphael, Brace of the Haligtree] Malenia, Goddess of Rot";
+	er::graces::grace_map[71501] = "[Elphael, Brace of the Haligtree] Prayer Room";
+
+	er::graces::grace_map[72015] = "[Enir-Ilim] Cleansing Chamber Anteroom";
+	er::graces::grace_map[72016] = "[Enir-Ilim] Divine Gate Front Staircase";
+	er::graces::grace_map[72012] = "[Enir-Ilim] Enir-Ilim: Outer Wall";
+	er::graces::grace_map[72013] = "[Enir-Ilim] First Rise";
+	er::graces::grace_map[72010] = "[Enir-Ilim] Gate of Divinity";
+	er::graces::grace_map[72014] = "[Enir-Ilim] Spiral Rise";
+
+	er::graces::grace_map[76507] = "[Flame Peak] Church of Repose";
+	er::graces::grace_map[73017] = "[Flame Peak] Giant,Conquering Hero's Grave";
+	er::graces::grace_map[73018] = "[Flame Peak] Giants' Mountaintop Catacombs";
+
+	er::graces::grace_map[76850] = "[Foot of the Jagged Peak] Foot of the Jagged Peak";
+	er::graces::grace_map[76840] = "[Foot of the Jagged Peak] Grand Altar of Dragon Communion";
+
+	er::graces::grace_map[73451] = "[Forbidden Lands] Divine Tower of East Altus";
+	er::graces::grace_map[73450] = "[Forbidden Lands] Divine Tower of East Altus: Gate";
+	er::graces::grace_map[76500] = "[Forbidden Lands] Forbidden Lands";
+	er::graces::grace_map[76502] = "[Forbidden Lands] Grand Lift of Rold";
+	er::graces::grace_map[73020] = "[Forbidden Lands] Hidden Path to the Haligtree";
+
+	er::graces::grace_map[74100] = "[Gravesite Plain] Belurat Gaol";
+	er::graces::grace_map[76813] = "[Gravesite Plain] Castle Front";
+	er::graces::grace_map[76804] = "[Gravesite Plain] Cliffroad Terminus";
+	er::graces::grace_map[74301] = "[Gravesite Plain] Dragon's Pit";
+	er::graces::grace_map[74351] = "[Gravesite Plain] Dragon's Pit Terminus";
+	er::graces::grace_map[76812] = "[Gravesite Plain] Ellac River Cave";
+	er::graces::grace_map[76830] = "[Gravesite Plain] Ellac River Downstream";
+	er::graces::grace_map[74000] = "[Gravesite Plain] Fog Rift Catacombs";
+	er::graces::grace_map[76800] = "[Gravesite Plain] Gravesite Plain";
+	er::graces::grace_map[76805] = "[Gravesite Plain] Greatbridge, North";
+	er::graces::grace_map[76803] = "[Gravesite Plain] Main Gate Cross";
+	er::graces::grace_map[76810] = "[Gravesite Plain] Pillar Path Cross";
+	er::graces::grace_map[76811] = "[Gravesite Plain] Pillar Path Waypoint";
+	er::graces::grace_map[74300] = "[Gravesite Plain] Rivermouth Cave";
+	er::graces::grace_map[74200] = "[Gravesite Plain] Ruined Forge Lava Intake";
+	er::graces::grace_map[76801] = "[Gravesite Plain] Scorched Ruins";
+	er::graces::grace_map[76802] = "[Gravesite Plain] Three,Path Cross";
+
+	er::graces::grace_map[76454] = "[Greyoll's Dragonbarrow] Bestial Sanctum";
+	er::graces::grace_map[73440] = "[Greyoll's Dragonbarrow] Divine Tower of Caelid: Basement";
+	er::graces::grace_map[73441] = "[Greyoll's Dragonbarrow] Divine Tower of Caelid: Center";
+	er::graces::grace_map[73110] = "[Greyoll's Dragonbarrow] Dragonbarrow Cave";
+	er::graces::grace_map[76452] = "[Greyoll's Dragonbarrow] Dragonbarrow Fork";
+	er::graces::grace_map[76450] = "[Greyoll's Dragonbarrow] Dragonbarrow West";
+	er::graces::grace_map[76456] = "[Greyoll's Dragonbarrow] Farum Greatbridge";
+	er::graces::grace_map[76453] = "[Greyoll's Dragonbarrow] Fort Faroth";
+	er::graces::grace_map[73460] = "[Greyoll's Dragonbarrow] Isolated Divine Tower";
+	er::graces::grace_map[76451] = "[Greyoll's Dragonbarrow] Isolated Merchant's Shack";
+	er::graces::grace_map[76455] = "[Greyoll's Dragonbarrow] Lenne's Rise";
+	er::graces::grace_map[73111] = "[Greyoll's Dragonbarrow] Sellia Hideaway";
+
+	er::graces::grace_map[76851] = "[Jagged Peak] Jagged Peak Mountainside";
+	er::graces::grace_map[76852] = "[Jagged Peak] Jagged Peak Summit";
+	er::graces::grace_map[76853] = "[Jagged Peak] Rest of the Dread Dragon";
+
+	er::graces::grace_map[71218] = "[Lake of Rot] Grand Cloister";
+	er::graces::grace_map[71216] = "[Lake of Rot] Lake of Rot Shoreside";
+
+	er::graces::grace_map[71125] = "[Leyndell, Ashen Capital] Divine Bridge";
+	er::graces::grace_map[71122] = "[Leyndell, Ashen Capital] East Capital Rampart";
+	er::graces::grace_map[71120] = "[Leyndell, Ashen Capital] Elden Throne";
+	er::graces::grace_map[71121] = "[Leyndell, Ashen Capital] Erdtree Sanctuary";
+	er::graces::grace_map[71123] = "[Leyndell, Ashen Capital] Leyndell, Capital of Ash";
+	er::graces::grace_map[71124] = "[Leyndell, Ashen Capital] Queen's Bedchamber";
+	er::graces::grace_map[71104] = "[Leyndell, Royal Capital] Avenue Balcony";
+	er::graces::grace_map[71109] = "[Leyndell, Royal Capital] Divine Bridge";
+	er::graces::grace_map[71102] = "[Leyndell, Royal Capital] East Capital Rampart";
+	er::graces::grace_map[71100] = "[Leyndell, Royal Capital] Elden Throne";
+	er::graces::grace_map[71101] = "[Leyndell, Royal Capital] Erdtree Sanctuary";
+	er::graces::grace_map[71108] = "[Leyndell, Royal Capital] Fortified Manor, First Floor";
+	er::graces::grace_map[71103] = "[Leyndell, Royal Capital] Lower Capital Church";
+	er::graces::grace_map[71107] = "[Leyndell, Royal Capital] Queen's Bedchamber";
+	er::graces::grace_map[71105] = "[Leyndell, Royal Capital] West Capital Rampart";
+
+	er::graces::grace_map[76108] = "[Limgrave] Agheel Lake North";
+	er::graces::grace_map[76106] = "[Limgrave] Agheel Lake South";
+	er::graces::grace_map[76103] = "[Limgrave] Artist's Shack";
+	er::graces::grace_map[76110] = "[Limgrave] Church of Dragon Communion";
+	er::graces::grace_map[76100] = "[Limgrave] Church of Elleh";
+	er::graces::grace_map[73115] = "[Limgrave] Coastal Cave";
+	er::graces::grace_map[76105] = "[Limgrave] Fort Haight West";
+	er::graces::grace_map[76111] = "[Limgrave] Gatefront Ruins";
+	er::graces::grace_map[73103] = "[Limgrave] Groveside Cave";
+	er::graces::grace_map[73117] = "[Limgrave] Highroad Cave";
+	er::graces::grace_map[73201] = "[Limgrave] Limgrave Tunnels";
+	er::graces::grace_map[76114] = "[Limgrave] Mistwood Outskirts";
+	er::graces::grace_map[73004] = "[Limgrave] Murkwater Catacombs";
+	er::graces::grace_map[73100] = "[Limgrave] Murkwater Cave";
+	er::graces::grace_map[76116] = "[Limgrave] Murkwater Coast";
+	er::graces::grace_map[76113] = "[Limgrave] Seaside Ruins";
+	er::graces::grace_map[73002] = "[Limgrave] Stormfoot Catacombs";
+	er::graces::grace_map[76119] = "[Limgrave] Summonwater Village Outskirts";
+	er::graces::grace_map[76101] = "[Limgrave] The First Step";
+	er::graces::grace_map[76104] = "[Limgrave] Third Church of Marika";
+	er::graces::grace_map[76120] = "[Limgrave] Waypoint Ruins Cellar";
+
+	er::graces::grace_map[73106] = "[Liurnia of the Lakes] Academy Crystal Cave";
+	er::graces::grace_map[76204] = "[Liurnia of the Lakes] Academy Gate Town";
+	er::graces::grace_map[76217] = "[Liurnia of the Lakes] Artist's Shack";
+	er::graces::grace_map[76238] = "[Liurnia of the Lakes] Behind Caria Manor";
+	er::graces::grace_map[73005] = "[Liurnia of the Lakes] Black Knife Catacombs";
+	er::graces::grace_map[76216] = "[Liurnia of the Lakes] Boilprawn Shack";
+	er::graces::grace_map[76224] = "[Liurnia of the Lakes] Church of Vows";
+	er::graces::grace_map[73006] = "[Liurnia of the Lakes] Cliffbottom Catacombs";
+	er::graces::grace_map[76237] = "[Liurnia of the Lakes] Converted Tower";
+	er::graces::grace_map[76243] = "[Liurnia of the Lakes] Crystalline Woods";
+	er::graces::grace_map[73422] = "[Liurnia of the Lakes] Divine Tower of Liurnia";
+	er::graces::grace_map[76242] = "[Liurnia of the Lakes] East Gate Bridge Trestle";
+	er::graces::grace_map[76223] = "[Liurnia of the Lakes] Eastern Liurnia Lake Shore";
+	er::graces::grace_map[76234] = "[Liurnia of the Lakes] Eastern Tableland";
+	er::graces::grace_map[76236] = "[Liurnia of the Lakes] Fallen Ruins of the Lake";
+	er::graces::grace_map[76219] = "[Liurnia of the Lakes] Folly on the Lake";
+	er::graces::grace_map[76210] = "[Liurnia of the Lakes] Foot of the Four Belfries";
+	er::graces::grace_map[76222] = "[Liurnia of the Lakes] Gate Town Bridge";
+	er::graces::grace_map[76233] = "[Liurnia of the Lakes] Gate Town North";
+	er::graces::grace_map[76209] = "[Liurnia of the Lakes] Grand Lift of Dectus";
+	er::graces::grace_map[76245] = "[Liurnia of the Lakes] Jarburg";
+	er::graces::grace_map[76212] = "[Liurnia of the Lakes] Kingsrealm Ruins";
+	er::graces::grace_map[76200] = "[Liurnia of the Lakes] Lake,Facing Cliffs";
+	er::graces::grace_map[73105] = "[Liurnia of the Lakes] Lakeside Crystal Cave";
+	er::graces::grace_map[76202] = "[Liurnia of the Lakes] Laskyar Ruins";
+	er::graces::grace_map[76221] = "[Liurnia of the Lakes] Liurnia Highway North";
+	er::graces::grace_map[76244] = "[Liurnia of the Lakes] Liurnia Highway South";
+	er::graces::grace_map[76201] = "[Liurnia of the Lakes] Liurnia Lake Shore";
+	er::graces::grace_map[73421] = "[Liurnia of the Lakes] Liurnia Tower Bridge";
+	er::graces::grace_map[76206] = "[Liurnia of the Lakes] Main Academy Gate";
+	er::graces::grace_map[76214] = "[Liurnia of the Lakes] Main Caria Manor Gate";
+	er::graces::grace_map[76231] = "[Liurnia of the Lakes] Manor Lower Level";
+	er::graces::grace_map[76230] = "[Liurnia of the Lakes] Manor Upper Level";
+	er::graces::grace_map[76226] = "[Liurnia of the Lakes] Mausoleum Compound";
+	er::graces::grace_map[76247] = "[Liurnia of the Lakes] Ranni's Chamber";
+	er::graces::grace_map[76228] = "[Liurnia of the Lakes] Ranni's Rise";
+	er::graces::grace_map[76229] = "[Liurnia of the Lakes] Ravine,Veiled Village";
+	er::graces::grace_map[73202] = "[Liurnia of the Lakes] Raya Lucaria Crystal Tunnel";
+	er::graces::grace_map[76218] = "[Liurnia of the Lakes] Revenger's Shack";
+	er::graces::grace_map[76213] = "[Liurnia of the Lakes] Road to the Manor";
+	er::graces::grace_map[76232] = "[Liurnia of the Lakes] Royal Moongazing Grounds";
+	er::graces::grace_map[76225] = "[Liurnia of the Lakes] Ruined Labyrinth";
+	er::graces::grace_map[76203] = "[Liurnia of the Lakes] Scenic Isle";
+	er::graces::grace_map[76215] = "[Liurnia of the Lakes] Slumbering Wolf's Shack";
+	er::graces::grace_map[76211] = "[Liurnia of the Lakes] Sorcerer's Isle";
+	er::graces::grace_map[76205] = "[Liurnia of the Lakes] South Raya Lucaria Gate";
+	er::graces::grace_map[73104] = "[Liurnia of the Lakes] Stillwater Cave";
+	er::graces::grace_map[73420] = "[Liurnia of the Lakes] Study Hall Entrance";
+	er::graces::grace_map[76241] = "[Liurnia of the Lakes] Temple Quarter";
+	er::graces::grace_map[76227] = "[Liurnia of the Lakes] The Four Belfries";
+	er::graces::grace_map[76235] = "[Liurnia of the Lakes] The Ravine";
+	er::graces::grace_map[76220] = "[Liurnia of the Lakes] Village of the Albinaurics";
+	er::graces::grace_map[73003] = "[Liurnia of the Lakes]Road's End Catacombs";
+
+	er::graces::grace_map[72800] = "[Midra's Manse] Discussion Chamber";
+	er::graces::grace_map[72801] = "[Midra's Manse] Manse Hall";
+	er::graces::grace_map[72802] = "[Midra's Manse] Midra's Library";
+	er::graces::grace_map[72803] = "[Midra's Manse] Second Floor Chamber";
+
+	er::graces::grace_map[71506] = "[Miquella's Haligtree] Haligtree Canopy";
+	er::graces::grace_map[71505] = "[Miquella's Haligtree] Haligtree Promenade";
+	er::graces::grace_map[71507] = "[Miquella's Haligtree] Haligtree Town";
+	er::graces::grace_map[71508] = "[Miquella's Haligtree] Haligtree Town Plaza";
+
+	er::graces::grace_map[71250] = "[Mohgwyn Palace] Cocoon of the Empyrean";
+	er::graces::grace_map[71252] = "[Mohgwyn Palace] Dynasty Mausoleum Entrance";
+	er::graces::grace_map[71253] = "[Mohgwyn Palace] Dynasty Mausoleum Midpoint";
+	er::graces::grace_map[71251] = "[Mohgwyn Palace] Palace Approach Ledge,Road";
+
+	er::graces::grace_map[76252] = "[Moonlight Altar] Altar South";
+	er::graces::grace_map[76251] = "[Moonlight Altar] Cathedral of Manus Celes";
+	er::graces::grace_map[76250] = "[Moonlight Altar] Moonlight Altar";
+
+	er::graces::grace_map[76503] = "[Mountaintops of the Giants] Ancient Snow Valley Ruins";
+	er::graces::grace_map[76522] = "[Mountaintops of the Giants] Castle Sol Main Gate";
+	er::graces::grace_map[76524] = "[Mountaintops of the Giants] Castle Sol Rooftop";
+	er::graces::grace_map[76523] = "[Mountaintops of the Giants] Church of the Eclipse";
+	er::graces::grace_map[76509] = "[Mountaintops of the Giants] Fire Giant";
+	er::graces::grace_map[76505] = "[Mountaintops of the Giants] First Church of Marika";
+	er::graces::grace_map[76508] = "[Mountaintops of the Giants] Foot of the Forge";
+	er::graces::grace_map[76510] = "[Mountaintops of the Giants] Forge of the Giants";
+	er::graces::grace_map[76504] = "[Mountaintops of the Giants] Freezing Lake";
+	er::graces::grace_map[76506] = "[Mountaintops of the Giants] Giant's Gravepost";
+	er::graces::grace_map[76521] = "[Mountaintops of the Giants] Snow Valley Ruins Overlook";
+	er::graces::grace_map[73122] = "[Mountaintops of the Giants] Spiritcaller's Cave";
+	er::graces::grace_map[76520] = "[Mountaintops of the Giants] Whiteridge Road";
+	er::graces::grace_map[76501] = "[Mountaintops of the Giants] Zamor Ruins";
+
+	er::graces::grace_map[76350] = "[Mt. Gelmir] Bridge of Iniquity";
+	er::graces::grace_map[76356] = "[Mt. Gelmir] Craftman's Shack";
+	er::graces::grace_map[76351] = "[Mt. Gelmir] First Mt. Gelmir Campsite";
+	er::graces::grace_map[73009] = "[Mt. Gelmir] Gelmir Hero's Grave";
+	er::graces::grace_map[76352] = "[Mt. Gelmir] Ninth Mt. Gelmir Campsite";
+	er::graces::grace_map[76357] = "[Mt. Gelmir] Primeval Sorcerer Azur";
+	er::graces::grace_map[76353] = "[Mt. Gelmir] Road of Iniquity";
+	er::graces::grace_map[73107] = "[Mt. Gelmir] Seethewater Cave";
+	er::graces::grace_map[76354] = "[Mt. Gelmir] Seethewater River";
+	er::graces::grace_map[76355] = "[Mt. Gelmir] Seethewater Terminus";
+	er::graces::grace_map[73109] = "[Mt. Gelmir] Volcano Cave";
+	er::graces::grace_map[73007] = "[Mt. Gelmir] Wyndham Catacombs";
+
+	er::graces::grace_map[71224] = "[Nokron, Eternal City] Ancestral Woods";
+	er::graces::grace_map[71225] = "[Nokron, Eternal City] Aqueduct,Facing Cliffs";
+	er::graces::grace_map[71220] = "[Nokron, Eternal City] Great Waterfall Basin";
+	er::graces::grace_map[71221] = "[Nokron, Eternal City] Mimic Tear";
+	er::graces::grace_map[71226] = "[Nokron, Eternal City] Night's Sacred Ground";
+	er::graces::grace_map[71271] = "[Nokron, Eternal City] Nokron, Eternal City";
+
+	er::graces::grace_map[76912] = "[Rauh Base] Ancient Ruins Base";
+	er::graces::grace_map[76914] = "[Rauh Base] Ravine North";
+	er::graces::grace_map[74001] = "[Rauh Base] Scorpion River Catacombs";
+	er::graces::grace_map[74203] = "[Rauh Base] Taylew's Ruined Forge";
+	er::graces::grace_map[76913] = "[Rauh Base] Temple Town Ruins";
+
+	er::graces::grace_map[71190] = "[Roundtable Hold] Table of Lost Grace";
+
+	er::graces::grace_map[73900] = "[Ruin,Strewn Precipice] Magma Wyrm Makar";
+	er::graces::grace_map[73901] = "[Ruin,Strewn Precipice] Ruin,Strewn Precipice";
+	er::graces::grace_map[73902] = "[Ruin,Strewn Precipice] Ruin,Strewn Precipice Overlook";
+
+	er::graces::grace_map[76910] = "[Scadu Altus] Behind the Fort of Reprimand";
+	er::graces::grace_map[74101] = "[Scadu Altus] Bonny Gaol";
+	er::graces::grace_map[76903] = "[Scadu Altus] Bonny Village";
+	er::graces::grace_map[76904] = "[Scadu Altus] Bridge Leading to the Village";
+	er::graces::grace_map[76916] = "[Scadu Altus] Castle Watering Hole";
+	er::graces::grace_map[76906] = "[Scadu Altus] Cathedral of Manus Metyr";
+	er::graces::grace_map[76905] = "[Scadu Altus] Church District Highroad";
+	er::graces::grace_map[74002] = "[Scadu Altus] Darklight Catacombs";
+	er::graces::grace_map[72500] = "[Scadu Altus] Finger Birthing Grounds";
+	er::graces::grace_map[76909] = "[Scadu Altus] Fort of Reprimand";
+	er::graces::grace_map[76900] = "[Scadu Altus] Highroad Cross";
+	er::graces::grace_map[76908] = "[Scadu Altus] Moorth Highway, South";
+	er::graces::grace_map[76902] = "[Scadu Altus] Moorth Ruins";
+	er::graces::grace_map[76918] = "[Scadu Altus] Recluses' River Downstream";
+	er::graces::grace_map[76917] = "[Scadu Altus] Recluses' River Upstream";
+	er::graces::grace_map[74202] = "[Scadu Altus] Ruined Forge of Starfall Past";
+	er::graces::grace_map[76907] = "[Scadu Altus] Scadu Altus, West";
+	er::graces::grace_map[76911] = "[Scadu Altus] Scaduview Cross";
+
+	er::graces::grace_map[76936] = "[Scaduview] Fingerstone Hill";
+	er::graces::grace_map[76935] = "[Scaduview] Hinterland";
+	er::graces::grace_map[76937] = "[Scaduview] Hinterland Bridge";
+	er::graces::grace_map[76960] = "[Scaduview] Scadutree Base";
+	er::graces::grace_map[76930] = "[Scaduview] Scaduview";
+	er::graces::grace_map[76931] = "[Scaduview] Shadow Keep, Back Gate";
+
+	er::graces::grace_map[72106] = "[Shadow Keep, Church District] Church District Entrance";
+	er::graces::grace_map[72107] = "[Shadow Keep, Church District] Sunken Chapel";
+	er::graces::grace_map[72108] = "[Shadow Keep, Church District] Tree,Worship Passage";
+	er::graces::grace_map[72109] = "[Shadow Keep, Church District] Tree,Worship Sanctum";
+
+	er::graces::grace_map[72101] = "[Shadow Keep] Main Gate Plaza";
+	er::graces::grace_map[72102] = "[Shadow Keep] Shadow Keep Main Gate";
+
+	er::graces::grace_map[71227] = "[Siofra River] Below the Well";
+	er::graces::grace_map[71222] = "[Siofra River] Siofra River Bank";
+	er::graces::grace_map[71270] = "[Siofra River] Siofra River Well Depths";
+	er::graces::grace_map[71223] = "[Siofra River] Worshippers' Woods";
+
+	er::graces::grace_map[72114] = "[Specimen Storehouse] Dark Chamber Entrance";
+	er::graces::grace_map[72110] = "[Specimen Storehouse] Messmer's Dark Chamber";
+	er::graces::grace_map[72116] = "[Specimen Storehouse] Storehouse, Back Section";
+	er::graces::grace_map[72111] = "[Specimen Storehouse] Storehouse, First Floor";
+	er::graces::grace_map[72112] = "[Specimen Storehouse] Storehouse, Fourth Floor";
+	er::graces::grace_map[72117] = "[Specimen Storehouse] Storehouse, Loft";
+	er::graces::grace_map[72113] = "[Specimen Storehouse] Storehouse, Seventh Floor";
+	er::graces::grace_map[72120] = "[Specimen Storehouse] West Rampart";
+
+	er::graces::grace_map[72202] = "[Stone Coffin Fissure] Fissure Cross";
+	er::graces::grace_map[72204] = "[Stone Coffin Fissure] Fissure Depths";
+	er::graces::grace_map[72203] = "[Stone Coffin Fissure] Fissure Waypoint";
+	er::graces::grace_map[72200] = "[Stone Coffin Fissure] Garden of Deep Purple";
+	er::graces::grace_map[72201] = "[Stone Coffin Fissure] Stone Coffin Fissure";
+
+	er::graces::grace_map[71900] = "[Stone Platform] Fractured Marika";
+
+	er::graces::grace_map[71002] = "[Stormhill] Castleward Tunnel";
+	er::graces::grace_map[73011] = "[Stormhill] Deathtouched Catacombs";
+	er::graces::grace_map[73412] = "[Stormhill] Divine Tower of Limgrave";
+	er::graces::grace_map[73410] = "[Stormhill] Limgrave Tower Bridge";
+	er::graces::grace_map[71001] = "[Stormhill] Margit, the Fell Omen";
+	er::graces::grace_map[76117] = "[Stormhill] Saintsbridge";
+	er::graces::grace_map[76102] = "[Stormhill] Stormhill Shack";
+	er::graces::grace_map[76118] = "[Stormhill] Warmaster's Shack";
+
+	er::graces::grace_map[71003] = "[Stormveil Castle] Gateside Chamber";
+	er::graces::grace_map[71000] = "[Stormveil Castle] Godrick the Grafted";
+	er::graces::grace_map[71006] = "[Stormveil Castle] Liftside Chamber";
+	er::graces::grace_map[71005] = "[Stormveil Castle] Rampart Tower";
+	er::graces::grace_map[71007] = "[Stormveil Castle] Secluded Cell";
+	er::graces::grace_map[71004] = "[Stormveil Castle] Stormveil Cliffside";
+	er::graces::grace_map[71008] = "[Stormveil Castle] Stormveil Main Gate";
+
+	er::graces::grace_map[71800] = "[Stranded Graveyard] Cave of Knowledge";
+	er::graces::grace_map[71801] = "[Stranded Graveyard] Stranded Graveyard";
+
+	er::graces::grace_map[73500] = "[Subterranean Shunning,Grounds] Cathedral of the Forsaken";
+	er::graces::grace_map[73502] = "[Subterranean Shunning,Grounds] Forsaken Depths";
+	er::graces::grace_map[73504] = "[Subterranean Shunning,Grounds] Frenzied Flame Proscription";
+	er::graces::grace_map[73503] = "[Subterranean Shunning,Grounds] Leyndell Catacombs";
+	er::graces::grace_map[73501] = "[Subterranean Shunning,Grounds] Underground Roadside";
+
+	er::graces::grace_map[76406] = "[Swamp of Aeonia] Aeonia Swamp Shore";
+	er::graces::grace_map[76407] = "[Swamp of Aeonia] Astray from Caelid Highway North";
+	er::graces::grace_map[76412] = "[Swamp of Aeonia] Heart of Aeonia";
+	er::graces::grace_map[76413] = "[Swamp of Aeonia] Inner Aeonia";
+
+	er::graces::grace_map[71606] = "[Volcano Manor] Abductor Virgin";
+	er::graces::grace_map[71605] = "[Volcano Manor] Audience Pathway";
+	er::graces::grace_map[71604] = "[Volcano Manor] Guest Hall";
+	er::graces::grace_map[71603] = "[Volcano Manor] Prison Town Church";
+	er::graces::grace_map[71600] = "[Volcano Manor] Rykard, Lord of Blasphemy";
+	er::graces::grace_map[71607] = "[Volcano Manor] Subterranean Inquisition Chamber";
+	er::graces::grace_map[71601] = "[Volcano Manor] Temple of Eiglay";
+	er::graces::grace_map[71602] = "[Volcano Manor] Volcano Manor";
+
+	er::graces::grace_map[76154] = "[Weeping Peninsula] Ailing Village Outskirts";
+	er::graces::grace_map[76159] = "[Weeping Peninsula] Behind the Castle";
+	er::graces::grace_map[76155] = "[Weeping Peninsula] Beside the Crater,Pocked Glade";
+	er::graces::grace_map[76160] = "[Weeping Peninsula] Beside the Rampart Gaol";
+	er::graces::grace_map[76157] = "[Weeping Peninsula] Bridge of Sacrifice";
+	er::graces::grace_map[76158] = "[Weeping Peninsula] Castle Morne Lift";
+	er::graces::grace_map[76151] = "[Weeping Peninsula] Castle Morne Rampart";
+	er::graces::grace_map[76150] = "[Weeping Peninsula] Church of Pilgrimage";
+	er::graces::grace_map[73101] = "[Weeping Peninsula] Earthbore Cave";
+	er::graces::grace_map[76162] = "[Weeping Peninsula] Fourth Church of Marika";
+	er::graces::grace_map[73001] = "[Weeping Peninsula] Impaler's Catacombs";
+	er::graces::grace_map[76156] = "[Weeping Peninsula] Isolated Merchant's Shack";
+	er::graces::grace_map[76161] = "[Weeping Peninsula] Morne Moangrave";
+	er::graces::grace_map[73200] = "[Weeping Peninsula] Morne Tunnel";
+	er::graces::grace_map[76153] = "[Weeping Peninsula] South of the Lookout Tower";
+	er::graces::grace_map[73000] = "[Weeping Peninsula] Tombsward Catacombs";
+	er::graces::grace_map[73102] = "[Weeping Peninsula] Tombsward Cave";
+	er::graces::grace_map[76152] = "[Weeping Peninsula] Weeping Evergaol";
+
+	return true;
+}();

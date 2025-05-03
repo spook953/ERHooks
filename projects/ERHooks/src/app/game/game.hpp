@@ -1,7 +1,7 @@
 #pragma once
 
+#include "elden_ring/elden_ring_graces.hpp"
 #include "elden_ring/elden_ring_items.hpp"
-#include "elden_ring/elden_ring_types.hpp"
 
 namespace er
 {
@@ -11,6 +11,10 @@ namespace er
 
 	inline MapItemMan *GetMapItemMan() {
 		return MemAddr{ bin::MapItemMan }.Deref().As<MapItemMan *>();
+	}
+
+	inline EventFlagMan *GetEventFlagMan() {
+		return bin::EventFlagMan.As<EventFlagMan *>();
 	}
 
 	inline bool InGame()

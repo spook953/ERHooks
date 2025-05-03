@@ -105,4 +105,16 @@ namespace er
 			bin::MapItemMan_GiveItem.Call<void>(this, &item, tmp, 0);
 		}
 	};
+
+	class EventFlagMan
+	{
+	public:
+		void SetFlag(const uint32_t flag, const bool val) {
+			bin::EventFlagMan_SetFlag.Call<uint32_t>(this, flag, val ? 1 : 0);
+		}
+
+		bool GetFlag(const uint32_t flag) {
+			return bin::EventFlagMan_GetFlag.Call<uint32_t>(this, flag) != 0;
+		}
+	};
 }

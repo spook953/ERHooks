@@ -12,4 +12,5 @@
 #include "utils/instance.hpp"
 #include "utils/log.hpp"
 #include "utils/memutils.hpp"
+#include "utils/utilfuncs.hpp"
 #include "utils/vec.hpp"

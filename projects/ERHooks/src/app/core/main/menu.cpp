@@ -69,12 +69,6 @@ void Menu::ItemSpawner(const er::ItemType item_type, const er::items::item_map_t
 		return;
 	}
 
-	auto to_lower = [](const std::string &str) {
-		std::string result{ str };
-		std::transform(result.begin(), result.end(), result.begin(), [](unsigned char c) { return std::tolower(c); });
-		return result;
-	};
-
 	const int index{ static_cast<int>(item_type) };
 
 	static char filters[5][128]{};
@@ -87,7 +81,7 @@ void Menu::ItemSpawner(const er::ItemType item_type, const er::items::item_map_t
 	static std::unordered_map<std::uint32_t, std::int32_t> quantity[5]{};
 	static std::unordered_map<std::uint32_t, bool> open[5]{};
 	
-	const std::string filter{ to_lower(filters[index]) };
+	const std::string filter{ Utils::ToLower(filters[index]) };
 
 	if (ImGui::BeginTable("item_table", 2, ImGuiTableFlags_ScrollY | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV))
 	{
@@ -98,7 +92,7 @@ void Menu::ItemSpawner(const er::ItemType item_type, const er::items::item_map_t
 
 		for (const auto &[id, name] : items)
 		{
-			if (!filter.empty() && !to_lower(name).contains(filter)) {
+			if (!filter.empty() && !Utils::ToLower(name).contains(filter)) {
 				continue;
 			}
 
@@ -144,6 +138,110 @@ void Menu::ItemSpawner(const er::ItemType item_type, const er::items::item_map_t
 			}
 
 			ImGui::PopID();
+		}
+
+		ImGui::EndTable();
+	}
+}
+
+void Menu::EventFlagEditor(const std::map<uint32_t, std::string> &flags)
+{
+	er::EventFlagMan *const event_flags{ er::GetEventFlagMan() };
+
+	if (!event_flags) {
+		return;
+	}
+
+	static bool confirm_unlock{};
+	static bool confirm_lock{};
+
+	const ImVec2 button_w{ (ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x) * 0.5f, 0.0f };
+
+	if (ImGui::Button("unlock all", button_w)) {
+		ImGui::OpenPopup("are you sure?###confirm_unlock");
+		confirm_unlock = true;
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("lock all", button_w)) {
+		ImGui::OpenPopup("are you sure?###confirm_lock");
+		confirm_lock = true;
+	}
+
+	auto ConfirmPopup = [](const char *const popup_name, bool *const open_flag, const std::function<void()> &on_confirm)
+	{
+		ImGui::SetNextWindowSize({ 200.0f, 0.0f });
+
+		const std::string name{ std::string{ "are you sure?###" } + popup_name };
+
+		if (ImGui::BeginPopupModal(name.c_str(), open_flag))
+		{
+			const ImVec2 button_w{ (ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x) * 0.5f, 0.0f };
+
+			if (ImGui::Button("yes", button_w)) {
+				on_confirm();
+				*open_flag = false;
+			}
+
+			ImGui::SameLine();
+
+			if (ImGui::Button("no", button_w)) {
+				*open_flag = false;
+			}
+
+			ImGui::EndPopup();
+		}
+	};
+
+	ConfirmPopup("confirm_unlock", &confirm_unlock, [&]()
+	{
+		for (const auto &[id, name] : flags) {
+			event_flags->SetFlag(id, true);
+		}
+	});
+
+	ConfirmPopup("confirm_lock", &confirm_lock, [&]()
+	{
+		for (const auto &[id, name] : flags) {
+			event_flags->SetFlag(id, false);
+		}
+	});
+
+	static char filter_raw[128]{};
+	{
+		ImGui::PushItemWidth(-1.0f);
+		ImGui::InputTextWithHint("##filter", "filter", filter_raw, IM_ARRAYSIZE(filter_raw));
+		ImGui::PopItemWidth();
+	}
+
+	const std::string filter{ Utils::ToLower(filter_raw) };
+
+	if (ImGui::BeginTable("flag_table", 2, ImGuiTableFlags_ScrollY | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV))
+	{
+		ImGui::TableSetupScrollFreeze(0, 1);
+		ImGui::TableSetupColumn("name", ImGuiTableColumnFlags_WidthFixed | ImGuiTableColumnFlags_DefaultSort, 350.0f);
+		ImGui::TableSetupColumn("state");
+		ImGui::TableHeadersRow();
+
+		for (const auto &[id, name] : flags)
+		{
+			if (!filter.empty() && !Utils::ToLower(name).contains(filter)) {
+				continue;
+			}
+
+			const bool is_set{ event_flags->GetFlag(id) };
+
+			ImGui::TableNextRow();
+			ImGui::TableSetColumnIndex(1);
+			ImGui::Text("%s", is_set ? "unlocked" : "locked");
+			ImGui::TableSetColumnIndex(0);
+			
+			ImGui::Selectable(name.c_str());
+
+			if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
+				event_flags->SetFlag(id, !is_set);
+			}
 		}
 
 		ImGui::EndTable();
@@ -198,6 +296,20 @@ void Menu::ItemsTab()
 	ImGui::EndTabBar();
 }
 
+void Menu::ProgressionTab()
+{
+	if (!ImGui::BeginTabBar("progression_tabs")) {
+		return;
+	}
+
+	if (ImGui::BeginTabItem("sites of grace")) {
+		EventFlagEditor(er::graces::GetGraceMap());
+		ImGui::EndTabItem();
+	}
+
+	ImGui::EndTabBar();
+}
+
 void Menu::MainWindow()
 {
 	if (!ImGui::BeginTabBar("main_tabs")) {
@@ -211,6 +323,11 @@ void Menu::MainWindow()
 
 	if (ImGui::BeginTabItem("items")) {
 		ItemsTab();
+		ImGui::EndTabItem();
+	}
+
+	if (ImGui::BeginTabItem("progression")) {
+		ProgressionTab();
 		ImGui::EndTabItem();
 	}
 
