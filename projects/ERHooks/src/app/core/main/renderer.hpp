@@ -23,9 +23,6 @@ private:
 private:
 	static inline bool initialized{};
 
-public:
-	static HWND GetOutputWindow() { return output_wnd; }
-
 private:
 	static void SetupImGuiStyle();
 

@@ -2,12 +2,6 @@
 
 void Log::EnableVirtualTerminal()
 {
-	static bool enabled{};
-
-	if (enabled) {
-		return;
-	}
-
 	const HANDLE out_h{ GetStdHandle(STD_OUTPUT_HANDLE) };
 
 	if (out_h == INVALID_HANDLE_VALUE) {
@@ -23,8 +17,6 @@ void Log::EnableVirtualTerminal()
 	mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
 
 	SetConsoleMode(out_h, mode);
-
-	enabled = true;
 }
 
 void Log::AllocCon(std::string_view name)
@@ -43,6 +35,8 @@ void Log::AllocCon(std::string_view name)
 	std::cin.clear();
 
 	std::ios::sync_with_stdio();
+
+	EnableVirtualTerminal();
 }
 
 void Log::FreeCon(const bool close_window)

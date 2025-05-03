@@ -98,9 +98,9 @@ void Renderer::SetupImGuiStyle()
 		cfg.GlyphOffset = { 1, 0 };
 		cfg.PixelSnapH = true;
 		cfg.FontBuilderFlags |= ImGuiFreeTypeBuilderFlags_Monochrome | ImGuiFreeTypeBuilderFlags_MonoHinting;
-
-		io.FontDefault = io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\tahoma.ttf", 13.0f, &cfg);
 	}
+
+	io.FontDefault = io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\tahoma.ttf", 13.0f, &cfg);
 }
 
 bool Renderer::Load()

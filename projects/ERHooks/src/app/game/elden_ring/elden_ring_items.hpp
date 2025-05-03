@@ -4,7 +4,7 @@
 
 namespace er::items
 {
-	using item_map_t = std::map<std::uint32_t, std::string>;
+	using item_map_t = std::map<uint32_t, std::string>;
 
 	const item_map_t &GetWeaponMap();
 	const item_map_t &GetProtectorMap();
