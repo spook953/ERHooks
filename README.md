@@ -13,6 +13,7 @@
 
 - edit player attributes
 - add items to inventory
+- lock/unlock sites of grace
 
 ## Libraries Used
 
@@ -24,4 +25,4 @@
 
 ## Screenshots
 
-![Alt Text](https://i.imgur.com/dz0p7tW.png)
+![Alt Text](https://i.imgur.com/K1x2SzW.png)
