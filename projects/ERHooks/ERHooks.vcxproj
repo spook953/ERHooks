@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="debug|x64">
+      <Configuration>debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="release|x64">
+      <Configuration>release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{de8bfb74-2f35-4285-9250-e56ed4e8e3c3}</ProjectGuid>
+    <RootNamespace>ERHooks</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ERHooks</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
+    <OutDir>$(SolutionDir)..\output\$(ProjectName)\bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\output\$(ProjectName)\build\$(Configuration)\</IntDir>
+    <TargetName>ERHooks</TargetName>
+    <GenerateManifest>false</GenerateManifest>
+    <IncludePath>$(SolutionDir)..\libs\freetype\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\libs\freetype\lib\x64\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
+    <OutDir>$(SolutionDir)..\output\$(ProjectName)\bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\output\$(ProjectName)\build\$(Configuration)\</IntDir>
+    <TargetName>ERHooks</TargetName>
+    <GenerateManifest>false</GenerateManifest>
+    <IncludePath>$(SolutionDir)..\libs\freetype\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\libs\freetype\lib\x64\release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>NotSet</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>NotSet</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\app\app.cpp" />
+    <ClCompile Include="src\app\core\hooks.cpp" />
+    <ClCompile Include="src\app\core\main\input.cpp" />
+    <ClCompile Include="src\app\core\main\menu.cpp" />
+    <ClCompile Include="src\app\core\main\renderer.cpp" />
+    <ClCompile Include="src\app\game\elden_ring\elden_ring_items.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_demo.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_draw.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_freetype.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_impl_dx12.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_tables.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\app\shared\libs\minhook\buffer.cpp" />
+    <ClCompile Include="src\app\shared\libs\minhook\hde64.cpp" />
+    <ClCompile Include="src\app\shared\libs\minhook\hook.cpp" />
+    <ClCompile Include="src\app\shared\libs\minhook\trampoline.cpp" />
+    <ClCompile Include="src\app\shared\utils\log.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\app\shared\utils\memaddr.cpp" />
+    <ClCompile Include="src\app\shared\utils\memutils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\app\app.hpp" />
+    <ClInclude Include="src\app\core\hooks.hpp" />
+    <ClInclude Include="src\app\core\main\input.hpp" />
+    <ClInclude Include="src\app\core\main\menu.hpp" />
+    <ClInclude Include="src\app\game\elden_ring\elden_ring_bin.hpp" />
+    <ClInclude Include="src\app\game\elden_ring\elden_ring_items.hpp" />
+    <ClInclude Include="src\app\game\elden_ring\elden_ring_types.hpp" />
+    <ClInclude Include="src\app\game\game.hpp" />
+    <ClInclude Include="src\app\core\main\renderer.hpp" />
+    <ClInclude Include="src\app\sdk\sdk.hpp" />
+    <ClInclude Include="src\app\sdk\utils\make_addr.hpp" />
+    <ClInclude Include="src\app\sdk\utils\make_hook.hpp" />
+    <ClInclude Include="src\app\sdk\utils\make_member.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imgui_freetype.hpp" />
+    <ClInclude Include="src\app\shared\utils\instance.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imconfig.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imgui.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imgui_impl_dx12.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imgui_impl_win32.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imgui_internal.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imstb_rectpack.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imstb_textedit.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imstb_truetype.hpp" />
+    <ClInclude Include="src\app\shared\libs\libs.hpp" />
+    <ClInclude Include="src\app\shared\libs\minhook\buffer.hpp" />
+    <ClInclude Include="src\app\shared\libs\minhook\hde64.hpp" />
+    <ClInclude Include="src\app\shared\libs\minhook\minhook.hpp" />
+    <ClInclude Include="src\app\shared\libs\minhook\table64.hpp" />
+    <ClInclude Include="src\app\shared\libs\minhook\trampoline.hpp" />
+    <ClInclude Include="src\app\shared\utils\log.hpp" />
+    <ClInclude Include="src\app\shared\utils\memaddr.hpp" />
+    <ClInclude Include="src\app\shared\utils\memutils.hpp" />
+    <ClInclude Include="src\app\shared\shared.hpp" />
+    <ClInclude Include="src\app\shared\utils\vec.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

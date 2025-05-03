@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\app\app.cpp" />
+    <ClCompile Include="src\app\shared\utils\log.cpp" />
+    <ClCompile Include="src\app\shared\utils\memutils.cpp" />
+    <ClCompile Include="src\app\shared\utils\memaddr.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_demo.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_draw.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_impl_dx12.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_tables.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\app\shared\libs\minhook\buffer.cpp" />
+    <ClCompile Include="src\app\shared\libs\minhook\hde64.cpp" />
+    <ClCompile Include="src\app\shared\libs\minhook\hook.cpp" />
+    <ClCompile Include="src\app\shared\libs\minhook\trampoline.cpp" />
+    <ClCompile Include="src\app\core\hooks.cpp" />
+    <ClCompile Include="src\app\core\main\renderer.cpp" />
+    <ClCompile Include="src\app\core\main\menu.cpp" />
+    <ClCompile Include="src\app\core\main\input.cpp" />
+    <ClCompile Include="src\app\shared\libs\imgui\imgui_freetype.cpp" />
+    <ClCompile Include="src\app\game\elden_ring\elden_ring_items.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\app\app.hpp" />
+    <ClInclude Include="src\app\shared\shared.hpp" />
+    <ClInclude Include="src\app\shared\utils\log.hpp" />
+    <ClInclude Include="src\app\shared\utils\instance.hpp" />
+    <ClInclude Include="src\app\shared\utils\memutils.hpp" />
+    <ClInclude Include="src\app\shared\utils\memaddr.hpp" />
+    <ClInclude Include="src\app\shared\libs\libs.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imconfig.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imgui.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imgui_impl_dx12.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imgui_impl_win32.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imgui_internal.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imstb_rectpack.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imstb_textedit.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imstb_truetype.hpp" />
+    <ClInclude Include="src\app\shared\libs\minhook\buffer.hpp" />
+    <ClInclude Include="src\app\shared\libs\minhook\hde64.hpp" />
+    <ClInclude Include="src\app\shared\libs\minhook\minhook.hpp" />
+    <ClInclude Include="src\app\shared\libs\minhook\table64.hpp" />
+    <ClInclude Include="src\app\shared\libs\minhook\trampoline.hpp" />
+    <ClInclude Include="src\app\core\main\renderer.hpp" />
+    <ClInclude Include="src\app\game\game.hpp" />
+    <ClInclude Include="src\app\game\elden_ring\elden_ring_bin.hpp" />
+    <ClInclude Include="src\app\core\main\menu.hpp" />
+    <ClInclude Include="src\app\game\elden_ring\elden_ring_types.hpp" />
+    <ClInclude Include="src\app\core\main\input.hpp" />
+    <ClInclude Include="src\app\shared\libs\imgui\imgui_freetype.hpp" />
+    <ClInclude Include="src\app\core\hooks.hpp" />
+    <ClInclude Include="src\app\shared\utils\vec.hpp" />
+    <ClInclude Include="src\app\sdk\sdk.hpp" />
+    <ClInclude Include="src\app\sdk\utils\make_addr.hpp" />
+    <ClInclude Include="src\app\sdk\utils\make_hook.hpp" />
+    <ClInclude Include="src\app\sdk\utils\make_member.hpp" />
+    <ClInclude Include="src\app\game\elden_ring\elden_ring_items.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+</Project>

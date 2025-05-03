@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ERHooks", "ERHooks\ERHooks.vcxproj", "{DE8BFB74-2F35-4285-9250-E56ED4E8E3C3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ERHooksLoader", "ERHooksLoader\ERHooksLoader.vcxproj", "{C7C095E0-390D-46AC-B6ED-8857AB424CB1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		debug|x64 = debug|x64
+		release|x64 = release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE8BFB74-2F35-4285-9250-E56ED4E8E3C3}.debug|x64.ActiveCfg = debug|x64
+		{DE8BFB74-2F35-4285-9250-E56ED4E8E3C3}.debug|x64.Build.0 = debug|x64
+		{DE8BFB74-2F35-4285-9250-E56ED4E8E3C3}.release|x64.ActiveCfg = release|x64
+		{DE8BFB74-2F35-4285-9250-E56ED4E8E3C3}.release|x64.Build.0 = release|x64
+		{C7C095E0-390D-46AC-B6ED-8857AB424CB1}.debug|x64.ActiveCfg = debug|x64
+		{C7C095E0-390D-46AC-B6ED-8857AB424CB1}.debug|x64.Build.0 = debug|x64
+		{C7C095E0-390D-46AC-B6ED-8857AB424CB1}.release|x64.ActiveCfg = release|x64
+		{C7C095E0-390D-46AC-B6ED-8857AB424CB1}.release|x64.Build.0 = release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {88FA01DF-C224-410C-BABE-1D25B3DF9F84}
+	EndGlobalSection
+EndGlobal
