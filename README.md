@@ -17,6 +17,7 @@
 - lock/unlock map pieces
 - lock/unlock cookbooks
 - lock/unlock affinities
+- kill/revive bosses
 
 ## Libraries Used
 

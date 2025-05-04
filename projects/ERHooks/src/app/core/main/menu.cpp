@@ -144,7 +144,7 @@ void Menu::ItemSpawner(const er::ItemType item_type, const er::items::item_map_t
 	}
 }
 
-void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char *const filter_input)
+void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char *const filter_input, const event_flag_edit_data_t &data)
 {
 	er::EventFlagMan *const event_flags{ er::GetEventFlagMan() };
 
@@ -157,14 +157,14 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 
 	const ImVec2 button_w{ (ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x) * 0.5f, 0.0f };
 
-	if (ImGui::Button("unlock all", button_w)) {
+	if (ImGui::Button(data.all_on.c_str(), button_w)) {
 		ImGui::OpenPopup("are you sure?###confirm_unlock");
 		confirm_unlock = true;
 	}
 
 	ImGui::SameLine();
 
-	if (ImGui::Button("lock all", button_w)) {
+	if (ImGui::Button(data.all_off.c_str(), button_w)) {
 		ImGui::OpenPopup("are you sure?###confirm_lock");
 		confirm_lock = true;
 	}
@@ -209,7 +209,7 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 	});
 
 	ImGui::PushItemWidth(-1.0f);
-	ImGui::InputTextWithHint("##filter", "filter", filter_input, 8);
+	ImGui::InputTextWithHint("##filter", "filter", filter_input, 50);
 	ImGui::PopItemWidth();
 
 	const std::string filter{ Utils::ToLower(filter_input) };
@@ -231,10 +231,12 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 
 			ImGui::TableNextRow();
 			ImGui::TableSetColumnIndex(1);
-			ImGui::Text("%s", is_set ? "unlocked" : "locked");
+			ImGui::Text("%s", is_set ? data.flag_on.c_str() : data.flag_off.c_str());
 			ImGui::TableSetColumnIndex(0);
-			
+
+			ImGui::PushID(id);		
 			ImGui::Selectable(name.c_str());
+			ImGui::PopID();
 
 			if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
 				event_flags->SetFlag(id, !is_set);
@@ -295,31 +297,56 @@ void Menu::ItemsTab()
 
 void Menu::ProgressionTab()
 {
+	er::EventFlagMan *const event_flags{ er::GetEventFlagMan() };
+
+	if (!event_flags) {
+		return;
+	}
+
 	if (!ImGui::BeginTabBar("progression_tabs")) {
 		return;
 	}
 
 	if (ImGui::BeginTabItem("sites of grace")) {
 		static char filter[128]{};
-		EventFlagEditor(er::event_flags::GetGraceMap(), filter);
+		EventFlagEditor(er::event_flags::GetGraceMap(), filter, { "unlocked", "locked", "unlock all", "lock all" });
 		ImGui::EndTabItem();
 	}
 
 	if (ImGui::BeginTabItem("map pieces")) {
 		static char filter[128]{};
-		EventFlagEditor(er::event_flags::GetMapPieceMap(), filter);
+		EventFlagEditor(er::event_flags::GetMapPieceMap(), filter, { "unlocked", "locked", "unlock all", "lock all" });
 		ImGui::EndTabItem();
 	}
 
 	if (ImGui::BeginTabItem("cookbooks")) {
 		static char filter[128]{};
-		EventFlagEditor(er::event_flags::GetCookBookMap(), filter);
+		EventFlagEditor(er::event_flags::GetCookBookMap(), filter, { "unlocked", "locked", "unlock all", "lock all" });
 		ImGui::EndTabItem();
 	}
 
 	if (ImGui::BeginTabItem("affinities")) {
 		static char filter[128]{};
-		EventFlagEditor(er::event_flags::GetAffinitiesMap(), filter);
+		EventFlagEditor(er::event_flags::GetAffinitiesMap(), filter, { "unlocked", "locked", "unlock all", "lock all" });
+		ImGui::EndTabItem();
+	}
+
+	if (ImGui::BeginTabItem("bosses"))
+	{
+		// special handling for the flower that spawns afer Malenia's defeat
+
+		const bool malenia_pre{ event_flags->GetFlag(er::event_flags::special::GetMaleniaDefeatedFlag()) };
+
+		static char filter[128]{};
+
+		EventFlagEditor(er::event_flags::GetBossDefeatedMap(), filter, { "dead", "alive", "kill all", "revive all" });
+
+		const bool malenia_cur{ event_flags->GetFlag(er::event_flags::special::GetMaleniaDefeatedFlag()) };
+
+		if (malenia_cur != malenia_pre) {
+			event_flags->SetFlag(er::event_flags::special::GetMaleniaFlowerFlag(), malenia_cur);
+		}
+
 		ImGui::EndTabItem();
 	}
 

@@ -10,4 +10,11 @@ namespace er::event_flags
 	const event_flag_map_t &GetMapPieceMap();
 	const event_flag_map_t &GetCookBookMap();
 	const event_flag_map_t &GetAffinitiesMap();
+	const event_flag_map_t &GetBossDefeatedMap();
+
+	namespace special
+	{
+		inline uint32_t GetMaleniaFlowerFlag() { return 9120; }
+		inline uint32_t GetMaleniaDefeatedFlag() { return 15000800; }
+	}
 }

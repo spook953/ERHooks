@@ -1,5 +1,7 @@
 #include "hooks.hpp"
 
+#define DUMP_EVENT_FLAGS FALSE
+
 MAKE_HOOK(
 	CDXGISwapChain_Present,
 	MemUtils::GetVirtual(er::bin::CDXGISwapChain.As<IDXGISwapChain *>(), 8).Get(),
@@ -126,3 +128,23 @@ MAKE_HOOK(
 	
 	return result;
 }
+
+#if DUMP_EVENT_FLAGS == TRUE
+
+MAKE_HOOK(
+	SetEventFlag,
+	er::bin::EventFlagMan_SetFlag.Get(),
+	unsigned int,
+	void *thisptr, unsigned int flag, int val)
+{
+	static std::unordered_set<unsigned int> flags{};
+
+	if (!flags.contains(flag)) {
+		flags.insert(flag);
+		Log::Wrn("set {} to {}", flag, val);
+	}
+
+	return CALL_ORIGINAL(thisptr, flag, val);
+}
+
+#endif
