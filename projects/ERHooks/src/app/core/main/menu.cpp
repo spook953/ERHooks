@@ -317,6 +317,12 @@ void Menu::ProgressionTab()
 		ImGui::EndTabItem();
 	}
 
+	if (ImGui::BeginTabItem("affinities")) {
+		static char filter[128]{};
+		EventFlagEditor(er::event_flags::GetAffinitiesMap(), filter);
+		ImGui::EndTabItem();
+	}
+
 	ImGui::EndTabBar();
 }
 

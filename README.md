@@ -16,6 +16,7 @@
 - lock/unlock sites of grace
 - lock/unlock map pieces
 - lock/unlock cookbooks
+- lock/unlock affinities
 
 ## Libraries Used
 

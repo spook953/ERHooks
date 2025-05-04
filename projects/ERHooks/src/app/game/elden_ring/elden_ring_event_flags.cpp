@@ -5,13 +5,15 @@ namespace er::event_flags
 	static event_flag_map_t grace_map{};
 	static event_flag_map_t map_piece_map{};
 	static event_flag_map_t cook_book_map{};
+	static event_flag_map_t affinities_map{};
 
 	const event_flag_map_t &GetGraceMap() { return grace_map; }
 	const event_flag_map_t &GetMapPieceMap() { return map_piece_map; }
 	const event_flag_map_t &GetCookBookMap() { return cook_book_map; }
+	const event_flag_map_t &GetAffinitiesMap() { return affinities_map; }
 }
 
-// BonfireWarpParam.txt
+// BonfireWarpParam
 static auto er_event_flags_init_grace_map = [&]() -> bool
 {
 	er::event_flags::grace_map[76860] = "[Abyssal Woods] Abyssal Woods";
@@ -488,7 +490,7 @@ static auto er_event_flags_init_grace_map = [&]() -> bool
 	return true;
 }();
 
-// WorldMapPieceParam.txt
+// WorldMapPieceParam
 static auto er_event_flags_init_map_piece_map = [&]() -> bool
 {
 	er::event_flags::map_piece_map[62000] = "Allow Map Display: Lands Between";
@@ -524,7 +526,7 @@ static auto er_event_flags_init_map_piece_map = [&]() -> bool
 	return true;
 }();
 
-// ShopLineupParam_Recipe.txt
+// ShopLineupParam_Recipe
 static auto er_event_flags_init_cook_book_map = [&]() -> bool
 {
 	er::event_flags::cook_book_map[68000] = "Ancient Dragon Apostle's Cookbook [1]";
@@ -651,6 +653,31 @@ static auto er_event_flags_init_cook_book_map = [&]() -> bool
 	er::event_flags::cook_book_map[68840] = "St. Trina Disciple's Cookbook [3]";
 	
 	er::event_flags::cook_book_map[68870] = "Tibia's Cookbook";
+
+	return true;
+}();
+
+// ??? (dumped manually)
+static auto er_event_flags_init_affinities_map = [&]() -> bool
+{
+	er::event_flags::affinities_map[60130] = "Whetstone Knife";
+
+	er::event_flags::affinities_map[65610] = "Heavy";
+	er::event_flags::affinities_map[65620] = "Keen";
+	er::event_flags::affinities_map[65630] = "Quality";
+
+	er::event_flags::affinities_map[65640] = "Fire";
+	er::event_flags::affinities_map[65650] = "Flame Art";
+
+	er::event_flags::affinities_map[65660] = "Lightning";
+	er::event_flags::affinities_map[65670] = "Sacred";
+
+	er::event_flags::affinities_map[65680] = "Magic";
+	er::event_flags::affinities_map[65690] = "Frost";
+
+	er::event_flags::affinities_map[65700] = "Poison";
+	er::event_flags::affinities_map[65710] = "Blood";
+	er::event_flags::affinities_map[65720] = "Occult";
 
 	return true;
 }();

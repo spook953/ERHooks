@@ -15,7 +15,7 @@ namespace er::items
 	const item_map_t &GetGemMap() { return gem_map; }
 }
 
-// EquipParamWeapon.txt
+// EquipParamWeapon
 static auto er_items_init_weapon_map = [&]() -> bool
 {
 	er::items::weapon_map[1000000] = "Dagger";
@@ -3353,7 +3353,7 @@ static auto er_items_init_weapon_map = [&]() -> bool
 	return true;
 }();
 
-// EquipParamProtector.txt
+// EquipParamProtector
 static auto er_items_init_protector_map = [&]() -> bool
 {
 	// er::items::protector_map[5000] = "Travel Hairstyle";
@@ -4088,7 +4088,7 @@ static auto er_items_init_protector_map = [&]() -> bool
 	return true;
 }();
 
-// EquipParamAccessory.txt
+// EquipParamAccessory
 static auto er_items_init_accessory_map = [&]() -> bool
 {
 	er::items::accessory_map[1000] = "Crimson Amber Medallion";
@@ -4250,7 +4250,7 @@ static auto er_items_init_accessory_map = [&]() -> bool
 	return true;
 }();
 
-// EquipParamGoods.txt
+// EquipParamGoods
 static auto er_items_init_goods_map = [&]() -> bool
 {
 	er::items::goods_map[100] = "Tarnished's Furled Finger";
@@ -6426,7 +6426,7 @@ static auto er_items_init_goods_map = [&]() -> bool
 	return true;
 }();
 
-// EquipParamGem.txt
+// EquipParamGem
 static auto er_items_init_gem_map = [&]() -> bool
 {
 	er::items::gem_map[10000] = "Ash of War: Lion's Claw";
