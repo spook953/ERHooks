@@ -23,7 +23,7 @@
     <ClCompile Include="src\app\core\main\input.cpp" />
     <ClCompile Include="src\app\shared\libs\imgui\imgui_freetype.cpp" />
     <ClCompile Include="src\app\game\elden_ring\elden_ring_items.cpp" />
-    <ClCompile Include="src\app\game\elden_ring\elden_ring_graces.cpp" />
+    <ClCompile Include="src\app\game\elden_ring\elden_ring_event_flags.cpp" />
     <ClCompile Include="src\app\shared\utils\utilfuncs.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -61,7 +61,7 @@
     <ClInclude Include="src\app\sdk\utils\make_hook.hpp" />
     <ClInclude Include="src\app\sdk\utils\make_member.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_items.hpp" />
-    <ClInclude Include="src\app\game\elden_ring\elden_ring_graces.hpp" />
+    <ClInclude Include="src\app\game\elden_ring\elden_ring_event_flags.hpp" />
     <ClInclude Include="src\app\shared\utils\utilfuncs.hpp" />
   </ItemGroup>
   <ItemGroup>

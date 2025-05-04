@@ -14,7 +14,7 @@ public:
 private:
 	static void AttributeEditor();
 	static void ItemSpawner(const er::ItemType item_type, const er::items::item_map_t &items);
-	static void EventFlagEditor(const std::map<uint32_t, std::string> &flags);
+	static void EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char *const filter_input);
 
 private:
 	static void PlayerTab();

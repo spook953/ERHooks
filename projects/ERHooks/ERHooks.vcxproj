@@ -106,7 +106,7 @@
     <ClCompile Include="src\app\core\main\input.cpp" />
     <ClCompile Include="src\app\core\main\menu.cpp" />
     <ClCompile Include="src\app\core\main\renderer.cpp" />
-    <ClCompile Include="src\app\game\elden_ring\elden_ring_graces.cpp" />
+    <ClCompile Include="src\app\game\elden_ring\elden_ring_event_flags.cpp" />
     <ClCompile Include="src\app\game\elden_ring\elden_ring_items.cpp" />
     <ClCompile Include="src\app\shared\libs\imgui\imgui.cpp" />
     <ClCompile Include="src\app\shared\libs\imgui\imgui_demo.cpp" />
@@ -132,7 +132,7 @@
     <ClInclude Include="src\app\core\main\input.hpp" />
     <ClInclude Include="src\app\core\main\menu.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_bin.hpp" />
-    <ClInclude Include="src\app\game\elden_ring\elden_ring_graces.hpp" />
+    <ClInclude Include="src\app\game\elden_ring\elden_ring_event_flags.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_items.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_types.hpp" />
     <ClInclude Include="src\app\game\game.hpp" />

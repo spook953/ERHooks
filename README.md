@@ -14,6 +14,7 @@
 - edit player attributes
 - add items to inventory
 - lock/unlock sites of grace
+- lock/unlock map pieces
 
 ## Libraries Used
 

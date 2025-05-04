@@ -144,7 +144,7 @@ void Menu::ItemSpawner(const er::ItemType item_type, const er::items::item_map_t
 	}
 }
 
-void Menu::EventFlagEditor(const std::map<uint32_t, std::string> &flags)
+void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char *const filter_input)
 {
 	er::EventFlagMan *const event_flags{ er::GetEventFlagMan() };
 
@@ -208,14 +208,11 @@ void Menu::EventFlagEditor(const std::map<uint32_t, std::string> &flags)
 		}
 	});
 
-	static char filter_raw[128]{};
-	{
-		ImGui::PushItemWidth(-1.0f);
-		ImGui::InputTextWithHint("##filter", "filter", filter_raw, IM_ARRAYSIZE(filter_raw));
-		ImGui::PopItemWidth();
-	}
+	ImGui::PushItemWidth(-1.0f);
+	ImGui::InputTextWithHint("##filter", "filter", filter_input, 8);
+	ImGui::PopItemWidth();
 
-	const std::string filter{ Utils::ToLower(filter_raw) };
+	const std::string filter{ Utils::ToLower(filter_input) };
 
 	if (ImGui::BeginTable("flag_table", 2, ImGuiTableFlags_ScrollY | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV))
 	{
@@ -303,7 +300,14 @@ void Menu::ProgressionTab()
 	}
 
 	if (ImGui::BeginTabItem("sites of grace")) {
-		EventFlagEditor(er::graces::GetGraceMap());
+		static char filter[128]{};
+		EventFlagEditor(er::event_flags::GetGraceMap(), filter);
+		ImGui::EndTabItem();
+	}
+
+	if (ImGui::BeginTabItem("map pieces")) {
+		static char filter[128]{};
+		EventFlagEditor(er::event_flags::GetMapPieceMap(), filter);
 		ImGui::EndTabItem();
 	}
 
