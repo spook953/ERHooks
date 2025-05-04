@@ -311,6 +311,12 @@ void Menu::ProgressionTab()
 		ImGui::EndTabItem();
 	}
 
+	if (ImGui::BeginTabItem("cookbooks")) {
+		static char filter[128]{};
+		EventFlagEditor(er::event_flags::GetCookBookMap(), filter);
+		ImGui::EndTabItem();
+	}
+
 	ImGui::EndTabBar();
 }
 

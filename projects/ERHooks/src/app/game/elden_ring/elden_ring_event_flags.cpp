@@ -4,9 +4,11 @@ namespace er::event_flags
 {
 	static event_flag_map_t grace_map{};
 	static event_flag_map_t map_piece_map{};
+	static event_flag_map_t cook_book_map{};
 
 	const event_flag_map_t &GetGraceMap() { return grace_map; }
 	const event_flag_map_t &GetMapPieceMap() { return map_piece_map; }
+	const event_flag_map_t &GetCookBookMap() { return cook_book_map; }
 }
 
 // BonfireWarpParam.txt
@@ -518,6 +520,137 @@ static auto er_event_flags_init_map_piece_map = [&]() -> bool
 	er::event_flags::map_piece_map[62082] = "Southern Shore";
 	er::event_flags::map_piece_map[62083] = "Rauh Ruins";
 	er::event_flags::map_piece_map[62084] = "Abyss";
+
+	return true;
+}();
+
+// ShopLineupParam_Recipe.txt
+static auto er_event_flags_init_cook_book_map = [&]() -> bool
+{
+	er::event_flags::cook_book_map[68000] = "Ancient Dragon Apostle's Cookbook [1]";
+	er::event_flags::cook_book_map[68010] = "Ancient Dragon Apostle's Cookbook [2]";
+	er::event_flags::cook_book_map[68030] = "Ancient Dragon Apostle's Cookbook [3]";
+	er::event_flags::cook_book_map[68020] = "Ancient Dragon Apostle's Cookbook [4]";
+	
+	er::event_flags::cook_book_map[68740] = "Ancient Dragon Knight's Cookbook [1]";
+	er::event_flags::cook_book_map[68780] = "Ancient Dragon Knight's Cookbook [2]";
+	
+	er::event_flags::cook_book_map[68910] = "Antiquity Scholar's Cookbook [1]";
+	er::event_flags::cook_book_map[68860] = "Antiquity Scholar's Cookbook [2]";
+	
+	er::event_flags::cook_book_map[67200] = "Armorer's Cookbook [1]";
+	er::event_flags::cook_book_map[67210] = "Armorer's Cookbook [2]";
+	er::event_flags::cook_book_map[67280] = "Armorer's Cookbook [3]";
+	er::event_flags::cook_book_map[67260] = "Armorer's Cookbook [4]";
+	er::event_flags::cook_book_map[67310] = "Armorer's Cookbook [5]";
+	er::event_flags::cook_book_map[67300] = "Armorer's Cookbook [6]";
+	er::event_flags::cook_book_map[67250] = "Armorer's Cookbook [7]";
+	
+	er::event_flags::cook_book_map[68800] = "Battlefield Priest's Cookbook [1]";
+	er::event_flags::cook_book_map[68820] = "Battlefield Priest's Cookbook [2]";
+	er::event_flags::cook_book_map[68890] = "Battlefield Priest's Cookbook [3]";
+	er::event_flags::cook_book_map[68930] = "Battlefield Priest's Cookbook [4]";
+	
+	er::event_flags::cook_book_map[68200] = "Fevor's Cookbook [1]";
+	er::event_flags::cook_book_map[68220] = "Fevor's Cookbook [2]";
+	er::event_flags::cook_book_map[68210] = "Fevor's Cookbook [3]";
+	
+	er::event_flags::cook_book_map[68920] = "Finger-Weaver's Cookbook [1]";
+	er::event_flags::cook_book_map[68580] = "Finger-Weaver's Cookbook [2]";
+	
+	er::event_flags::cook_book_map[68770] = "Fire Knight's Cookbook [1]";
+	er::event_flags::cook_book_map[68900] = "Fire Knight's Cookbook [2]";
+	
+	er::event_flags::cook_book_map[68520] = "Forager Brood Cookbook [1]";
+	er::event_flags::cook_book_map[68530] = "Forager Brood Cookbook [2]";
+	er::event_flags::cook_book_map[68540] = "Forager Brood Cookbook [3]";
+	er::event_flags::cook_book_map[68550] = "Forager Brood Cookbook [4]";
+	er::event_flags::cook_book_map[68560] = "Forager Brood Cookbook [5]";
+	er::event_flags::cook_book_map[68510] = "Forager Brood Cookbook [6]";
+	er::event_flags::cook_book_map[68830] = "Forager Brood Cookbook [7]";
+	
+	er::event_flags::cook_book_map[68400] = "Frenzied's Cookbook [1]";
+	er::event_flags::cook_book_map[68410] = "Frenzied's Cookbook [2]";
+	
+	er::event_flags::cook_book_map[67410] = "Glintstone Craftsman's Cookbook [1]";
+	er::event_flags::cook_book_map[67450] = "Glintstone Craftsman's Cookbook [2]";
+	er::event_flags::cook_book_map[67480] = "Glintstone Craftsman's Cookbook [3]";
+	er::event_flags::cook_book_map[67400] = "Glintstone Craftsman's Cookbook [4]";
+	er::event_flags::cook_book_map[67420] = "Glintstone Craftsman's Cookbook [5]";
+	er::event_flags::cook_book_map[67460] = "Glintstone Craftsman's Cookbook [6]";
+	er::event_flags::cook_book_map[67470] = "Glintstone Craftsman's Cookbook [7]";
+	er::event_flags::cook_book_map[67440] = "Glintstone Craftsman's Cookbook [8]";
+	
+	er::event_flags::cook_book_map[68940] = "Grave Keeper's Cookbook [1]";
+	er::event_flags::cook_book_map[68850] = "Grave Keeper's Cookbook [2]";
+	
+	er::event_flags::cook_book_map[68590] = "Greater Potentate's Cookbook [1]";
+	er::event_flags::cook_book_map[68730] = "Greater Potentate's Cookbook [2]";
+	er::event_flags::cook_book_map[68690] = "Greater Potentate's Cookbook [3]";
+	er::event_flags::cook_book_map[68600] = "Greater Potentate's Cookbook [4]";
+	er::event_flags::cook_book_map[68610] = "Greater Potentate's Cookbook [5]";
+	er::event_flags::cook_book_map[68720] = "Greater Potentate's Cookbook [6]";
+	er::event_flags::cook_book_map[68630] = "Greater Potentate's Cookbook [7]";
+	er::event_flags::cook_book_map[68680] = "Greater Potentate's Cookbook [8]";
+	er::event_flags::cook_book_map[68640] = "Greater Potentate's Cookbook [9]";
+	er::event_flags::cook_book_map[68650] = "Greater Potentate's Cookbook [10]";
+	er::event_flags::cook_book_map[68660] = "Greater Potentate's Cookbook [11]";
+	er::event_flags::cook_book_map[68620] = "Greater Potentate's Cookbook [12]";
+	er::event_flags::cook_book_map[68700] = "Greater Potentate's Cookbook [13]";
+	er::event_flags::cook_book_map[68710] = "Greater Potentate's Cookbook [14]";
+	
+	er::event_flags::cook_book_map[68810] = "Igon's Cookbook [1]";
+	er::event_flags::cook_book_map[68570] = "Igon's Cookbook [2]";
+	
+	er::event_flags::cook_book_map[68790] = "Loyal Knight's Cookbook";
+	
+	er::event_flags::cook_book_map[68750] = "Mad Craftsman's Cookbook [1]";
+	er::event_flags::cook_book_map[68670] = "Mad Craftsman's Cookbook [2]";
+	er::event_flags::cook_book_map[68880] = "Mad Craftsman's Cookbook [3]";
+	
+	er::event_flags::cook_book_map[67610] = "Missionary's Cookbook [1]";
+	er::event_flags::cook_book_map[67600] = "Missionary's Cookbook [2]";
+	er::event_flags::cook_book_map[67650] = "Missionary's Cookbook [3]";
+	er::event_flags::cook_book_map[67640] = "Missionary's Cookbook [4]";
+	er::event_flags::cook_book_map[67630] = "Missionary's Cookbook [5]";
+	er::event_flags::cook_book_map[67130] = "Missionary's Cookbook [6]";
+	er::event_flags::cook_book_map[68230] = "Missionary's Cookbook [7]";
+	
+	er::event_flags::cook_book_map[67000] = "Nomadic Warrior's Cookbook [1]";
+	er::event_flags::cook_book_map[67110] = "Nomadic Warrior's Cookbook [2]";
+	er::event_flags::cook_book_map[67010] = "Nomadic Warrior's Cookbook [3]";
+	er::event_flags::cook_book_map[67800] = "Nomadic Warrior's Cookbook [4]";
+	er::event_flags::cook_book_map[67830] = "Nomadic Warrior's Cookbook [5]";
+	er::event_flags::cook_book_map[67020] = "Nomadic Warrior's Cookbook [6]";
+	er::event_flags::cook_book_map[67050] = "Nomadic Warrior's Cookbook [7]";
+	er::event_flags::cook_book_map[67880] = "Nomadic Warrior's Cookbook [8]";
+	er::event_flags::cook_book_map[67430] = "Nomadic Warrior's Cookbook [9]";
+	er::event_flags::cook_book_map[67030] = "Nomadic Warrior's Cookbook [10]";
+	er::event_flags::cook_book_map[67220] = "Nomadic Warrior's Cookbook [11]";
+	er::event_flags::cook_book_map[67060] = "Nomadic Warrior's Cookbook [12]";
+	er::event_flags::cook_book_map[67080] = "Nomadic Warrior's Cookbook [13]";
+	er::event_flags::cook_book_map[67870] = "Nomadic Warrior's Cookbook [14]";
+	er::event_flags::cook_book_map[67900] = "Nomadic Warrior's Cookbook [15]";
+	er::event_flags::cook_book_map[67290] = "Nomadic Warrior's Cookbook [16]";
+	er::event_flags::cook_book_map[67100] = "Nomadic Warrior's Cookbook [17]";
+	er::event_flags::cook_book_map[67270] = "Nomadic Warrior's Cookbook [18]";
+	er::event_flags::cook_book_map[67070] = "Nomadic Warrior's Cookbook [19]";
+	er::event_flags::cook_book_map[67230] = "Nomadic Warrior's Cookbook [20]";
+	er::event_flags::cook_book_map[67120] = "Nomadic Warrior's Cookbook [21]";
+	er::event_flags::cook_book_map[67890] = "Nomadic Warrior's Cookbook [22]";
+	er::event_flags::cook_book_map[67090] = "Nomadic Warrior's Cookbook [23]";
+	er::event_flags::cook_book_map[67910] = "Nomadic Warrior's Cookbook [24]";
+	
+	er::event_flags::cook_book_map[67840] = "Perfumer's Cookbook [1]";
+	er::event_flags::cook_book_map[67850] = "Perfumer's Cookbook [2]";
+	er::event_flags::cook_book_map[67860] = "Perfumer's Cookbook [3]";
+	er::event_flags::cook_book_map[67920] = "Perfumer's Cookbook [4]";
+	
+	er::event_flags::cook_book_map[68760] = "St. Trina Disciple's Cookbook [1]";
+	er::event_flags::cook_book_map[68950] = "St. Trina Disciple's Cookbook [2]";
+	er::event_flags::cook_book_map[68840] = "St. Trina Disciple's Cookbook [3]";
+	
+	er::event_flags::cook_book_map[68870] = "Tibia's Cookbook";
 
 	return true;
 }();

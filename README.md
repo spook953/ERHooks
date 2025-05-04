@@ -15,6 +15,7 @@
 - add items to inventory
 - lock/unlock sites of grace
 - lock/unlock map pieces
+- lock/unlock cookbooks
 
 ## Libraries Used
 
