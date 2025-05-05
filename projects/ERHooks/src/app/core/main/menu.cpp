@@ -247,6 +247,68 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 	}
 }
 
+void Menu::PlayerMisc()
+{
+	er::GameDataMan *const game_data{ er::GetGameDataMan() };
+
+	if (!game_data) {
+		return;
+	}
+
+	er::ChrGameData *const chr_data{ game_data->m_chr_data() };
+
+	if (!chr_data) {
+		return;
+	}
+
+	// great rune
+	{
+		static const char *rune_names[]
+		{
+			"None",
+			"Godrick's Great Rune",
+			"Rykard's Great Rune",
+			"Radahn's Great Rune",
+			"Morgott's Great Rune",
+			"Mohg's Great Rune",
+			"Malenia's Great Rune"
+		};
+
+		static uint32_t rune_vals[]{
+			0x00000000, 0xB00000BF, 0xB00000C2, 0xB00000C0, 0xB00000C1, 0xB00000C3, 0xB00000C4
+		};
+
+		static int item_selected_idx{};
+
+		ImGui::PushItemWidth(150.0f);
+
+		if (ImGui::BeginCombo("##great rune", rune_names[item_selected_idx]))
+		{
+			for (int n{}; n < IM_ARRAYSIZE(rune_names); n++)
+			{
+				const bool is_selected{ item_selected_idx == n };
+
+				if (ImGui::Selectable(rune_names[n], is_selected)) {
+					item_selected_idx = n;
+					chr_data->m_great_rune() = rune_vals[item_selected_idx];
+				}
+
+				if (is_selected) {
+					ImGui::SetItemDefaultFocus();
+				}
+			}
+
+			ImGui::EndCombo();
+		}
+
+		ImGui::PopItemWidth();
+
+		ImGui::SameLine();
+
+		ImGui::Checkbox("active", &chr_data->m_rune_arc_active());
+	}
+}
+
 void Menu::PlayerTab()
 {
 	if (!ImGui::BeginTabBar("player_tabs")) {
@@ -255,6 +317,11 @@ void Menu::PlayerTab()
 
 	if (ImGui::BeginTabItem("attributes")) {
 		AttributeEditor();
+		ImGui::EndTabItem();
+	}
+
+	if (ImGui::BeginTabItem("misc")) {
+		PlayerMisc();
 		ImGui::EndTabItem();
 	}
 

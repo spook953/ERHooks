@@ -21,10 +21,7 @@ namespace er
 		0x40000000, // Good
 		0x80000000  // Gem
 	};
-}
 
-namespace er
-{
 	class DLUserInputDevice
 	{
 	public:
@@ -71,6 +68,8 @@ namespace er
 	{
 	public:
 		MAKE_MEMBER(ChrStats, m_stats, 60);
+		MAKE_MEMBER(bool, m_rune_arc_active, 255);
+		MAKE_MEMBER(uint32_t, m_great_rune, 1472);
 	};
 
 	class GameDataMan
