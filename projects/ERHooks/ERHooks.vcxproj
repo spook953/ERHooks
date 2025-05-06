@@ -132,6 +132,7 @@
     <ClInclude Include="src\app\core\hooks.hpp" />
     <ClInclude Include="src\app\core\main\input.hpp" />
     <ClInclude Include="src\app\core\main\menu.hpp" />
+    <ClInclude Include="src\app\core\main\settings.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_bin.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_event_flags.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_items.hpp" />

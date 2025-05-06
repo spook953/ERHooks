@@ -2,12 +2,7 @@
 
 #include "input.hpp"
 #include "renderer.hpp"
-
-struct Settings
-{
-	static inline bool disable_chromatic_aberration{ false };
-	static inline bool disable_vignette{ false };
-};
+#include "settings.hpp"
 
 class Menu final
 {

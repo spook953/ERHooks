@@ -64,6 +64,7 @@
     <ClInclude Include="src\app\game\elden_ring\elden_ring_items.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_event_flags.hpp" />
     <ClInclude Include="src\app\shared\utils\utilfuncs.hpp" />
+    <ClInclude Include="src\app\core\main\settings.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
