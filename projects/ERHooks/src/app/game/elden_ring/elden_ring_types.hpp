@@ -13,15 +13,6 @@ namespace er
 		Gem
 	};
 
-	constexpr uint32_t item_type_hex[5]
-	{
-		0x00000000, // Weapon
-		0x10000000, // Protector
-		0x20000000, // Accessory
-		0x40000000, // Good
-		0x80000000  // Gem
-	};
-
 	class DLUserInputDevice
 	{
 	public:
@@ -31,9 +22,7 @@ namespace er
 	class DLUserInputDeviceImpl : public DLUserInputDevice
 	{
 	public:
-		void ResetInput() {
-			MemUtils::GetVirtual(this, 43).Call<void *>(this); // ret void * ?
-		}
+		void ResetInput();
 	};
 
 	class KeyboardDevice final : public DLUserInputDeviceImpl
@@ -81,39 +70,13 @@ namespace er
 	class MapItemMan
 	{
 	public:
-		void GiveItem(const ItemType type, const uint32_t id, const uint32_t quantity)
-		{
-			// shoutouts to the guys @ ?ServerName?
-
-			struct item_t
-			{
-				int32_t count{ 1 };
-				uint32_t item_id{};
-				int32_t quantity{};
-				int32_t unk{ -1 };
-				int32_t gem_id{ -1 };
-			};
-
-			const item_t item {
-				.item_id = id | item_type_hex[static_cast<int>(type)],
-				.quantity = static_cast<int32_t>(quantity)
-			};
-
-			const uint8_t tmp[100]{};
-
-			bin::MapItemMan_GiveItem.Call<void>(this, &item, tmp, 0);
-		}
+		void GiveItem(const ItemType type, const uint32_t id, const uint32_t quantity);
 	};
 
 	class EventFlagMan
 	{
 	public:
-		void SetFlag(const uint32_t flag, const bool val) {
-			bin::EventFlagMan_SetFlag.Call<uint32_t>(this, flag, val ? 1 : 0);
-		}
-
-		bool GetFlag(const uint32_t flag) {
-			return bin::EventFlagMan_GetFlag.Call<uint32_t>(this, flag) != 0;
-		}
+		void SetFlag(const uint32_t flag, const bool val);
+		bool GetFlag(const uint32_t flag);
 	};
 }
