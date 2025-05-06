@@ -279,20 +279,11 @@ void Menu::PlayerMisc()
 		};
 
 		static int item_selected_idx{};
-		static bool first{ true };
-
-		if (first)
+		
+		for (int n{}; n < IM_ARRAYSIZE(rune_vals); n++)
 		{
-			first = false;
-
-			for (int n{}; n < IM_ARRAYSIZE(rune_vals); n++)
-			{
-				if (rune_vals[n] != chr_data->m_great_rune()) {
-					continue;
-				}
-
+			if (rune_vals[n] == chr_data->m_great_rune()) {
 				item_selected_idx = n;
-
 				break;
 			}
 		}
