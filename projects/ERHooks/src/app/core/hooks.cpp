@@ -148,3 +148,24 @@ MAKE_HOOK(
 }
 
 #endif
+
+MAKE_HOOK(
+	PostProcessFunc,
+	er::bin::PostProcessFunc.Get(),
+	void,
+	__int64 a1, __int64 a2, unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6,
+	__int64 a7, __int64 a8, __int64 a9, __int64 a10, __int64 a11, __int64 a12, char a13, int a14)
+{
+	TEMP_SET_SELF(*reinterpret_cast<int *>(a1 + 216));
+	TEMP_SET_SELF(*reinterpret_cast<int *>(a1 + 272));
+
+	if (Settings::disable_chromatic_aberration) {
+		*reinterpret_cast<int *>(a1 + 216) = 0;
+	}
+
+	if (Settings::disable_vignette) {
+		*reinterpret_cast<int *>(a1 + 272) = INT_MAX;
+	}
+
+	CALL_ORIGINAL(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+}

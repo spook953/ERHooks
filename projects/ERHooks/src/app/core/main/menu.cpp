@@ -428,6 +428,25 @@ void Menu::ProgressionTab()
 	ImGui::EndTabBar();
 }
 
+void Menu::GameTab()
+{
+	if (!ImGui::BeginTabBar("game_tabs")) {
+		return;
+	}
+
+	if (ImGui::BeginTabItem("post-processing"))
+	{
+		ImGui::Checkbox("disable chromatic aberration", &Settings::disable_chromatic_aberration);
+		ImGui::Checkbox("disable vignette", &Settings::disable_vignette);
+
+		ImGui::Separator();
+
+		ImGui::EndTabItem();
+	}
+
+	ImGui::EndTabBar();
+}
+
 void Menu::MainWindow()
 {
 	if (!ImGui::BeginTabBar("main_tabs")) {
@@ -446,6 +465,11 @@ void Menu::MainWindow()
 
 	if (ImGui::BeginTabItem("progression")) {
 		ProgressionTab();
+		ImGui::EndTabItem();
+	}
+
+	if (ImGui::BeginTabItem("game")) {
+		GameTab();
 		ImGui::EndTabItem();
 	}
 

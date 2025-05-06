@@ -146,3 +146,17 @@ MAKE_ADDR
 		"44 8B 41 1C 44 8B DA"
 	)
 );
+
+MAKE_ADDR
+(
+	er::bin,
+
+	PostProcessFunc,
+
+	MemUtils::FindPatMod(
+		"eldenring.exe",
+		"E8 ? ? ? ? 4D 8D B7 ? ? ? ? 49 8B CE"
+	)
+
+	.Rip(1)
+);

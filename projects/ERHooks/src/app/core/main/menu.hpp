@@ -3,6 +3,12 @@
 #include "input.hpp"
 #include "renderer.hpp"
 
+struct Settings
+{
+	static inline bool disable_chromatic_aberration{ false };
+	static inline bool disable_vignette{ false };
+};
+
 class Menu final
 {
 private:
@@ -30,6 +36,7 @@ private:
 	static void PlayerTab();
 	static void ItemsTab();
 	static void ProgressionTab();
+	static void GameTab();
 
 private:
 	static void MainWindow();

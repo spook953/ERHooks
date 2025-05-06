@@ -18,6 +18,9 @@
 - lock/unlock cookbooks
 - lock/unlock affinities
 - kill/revive bosses
+- select great rune
+- activate rune arc
+- disable post processing effects
 
 ## Libraries Used
 
@@ -29,4 +32,4 @@
 
 ## Screenshots
 
-![Alt Text](https://i.imgur.com/K1x2SzW.png)
+![Alt Text](https://i.imgur.com/6qBV072.png)
