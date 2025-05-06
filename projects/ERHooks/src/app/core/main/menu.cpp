@@ -265,7 +265,7 @@ void Menu::PlayerMisc()
 	{
 		static const char *rune_names[]
 		{
-			"None",
+			"No Great Rune",
 			"Godrick's Great Rune",
 			"Rykard's Great Rune",
 			"Radahn's Great Rune",
@@ -279,10 +279,27 @@ void Menu::PlayerMisc()
 		};
 
 		static int item_selected_idx{};
+		static bool first{ true };
 
-		ImGui::PushItemWidth(150.0f);
+		if (first)
+		{
+			first = false;
 
-		if (ImGui::BeginCombo("##great rune", rune_names[item_selected_idx]))
+			for (int n{}; n < IM_ARRAYSIZE(rune_vals); n++)
+			{
+				if (rune_vals[n] != chr_data->m_great_rune()) {
+					continue;
+				}
+
+				item_selected_idx = n;
+
+				break;
+			}
+		}
+
+		ImGui::SetNextItemWidth(150.0f);
+
+		if (ImGui::BeginCombo("##great_rune_combo", rune_names[item_selected_idx]))
 		{
 			for (int n{}; n < IM_ARRAYSIZE(rune_names); n++)
 			{
@@ -301,11 +318,11 @@ void Menu::PlayerMisc()
 			ImGui::EndCombo();
 		}
 
-		ImGui::PopItemWidth();
-
 		ImGui::SameLine();
 
-		ImGui::Checkbox("active", &chr_data->m_rune_arc_active());
+		ImGui::Checkbox("rune arc active", &chr_data->m_rune_arc_active());
+
+		ImGui::Separator();
 	}
 }
 
