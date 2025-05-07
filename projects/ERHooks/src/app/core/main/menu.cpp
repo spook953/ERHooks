@@ -315,6 +315,19 @@ void Menu::PlayerMisc()
 
 		ImGui::Separator();
 	}
+
+	ImGui::SetNextItemWidth(150.0f);
+	ImGui::SliderFloat("##no clip speed", &Settings::no_clip_speed, 0.1f, 1.0f, "%.1f");
+
+	ImGui::SameLine();
+
+	ImGui::Checkbox("no clip active", &Settings::no_clip);
+
+	ImGui::Separator();
+
+	ImGui::Checkbox("no death", &Settings::no_death);
+
+	ImGui::Separator();
 }
 
 void Menu::PlayerTab()

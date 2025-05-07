@@ -79,4 +79,55 @@ namespace er
 		void SetFlag(const uint32_t flag, const bool val);
 		bool GetFlag(const uint32_t flag);
 	};
+
+	class CSCharData
+	{
+	public:
+		MAKE_MEMBER(int, m_flags, 411);
+	};
+
+	class CSChrPhysicsModule
+	{
+	public:
+		MAKE_MEMBER(vec3_t, m_pos, 112);
+		MAKE_MEMBER(bool, m_on_ground, 146);
+	};
+
+	class CSChrFallModule
+	{
+	public:
+		MAKE_MEMBER(float, m_fall_timer, 24);
+	};
+
+	class ChrModules
+	{
+	public:
+		MAKE_MEMBER(CSCharData *, m_char_data, 0);
+		MAKE_MEMBER(CSChrPhysicsModule *, m_char_physics, 104);
+		MAKE_MEMBER(CSChrFallModule *, m_fall, 112);
+	};
+
+	class PlayerIns
+	{
+	public:
+		MAKE_MEMBER(ChrModules *, m_modules, 400);
+	};
+
+	class LocalPlayerIns
+	{
+	public:
+		MAKE_MEMBER(PlayerIns *, m_player, 0);
+	};
+
+	class WorldChrMan
+	{
+	public:
+		MAKE_MEMBER(LocalPlayerIns *, m_local_player, 69368);
+	};
+
+	class CameraMatrix
+	{
+	public:
+		MAKE_MEMBER(vec3_t, m_angles, 348);
+	};
 }

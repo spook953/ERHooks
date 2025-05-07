@@ -109,6 +109,7 @@
     <ClCompile Include="src\app\game\elden_ring\elden_ring_event_flags.cpp" />
     <ClCompile Include="src\app\game\elden_ring\elden_ring_items.cpp" />
     <ClCompile Include="src\app\game\elden_ring\elden_ring_types.cpp" />
+    <ClCompile Include="src\app\game\game.cpp" />
     <ClCompile Include="src\app\shared\libs\imgui\imgui.cpp" />
     <ClCompile Include="src\app\shared\libs\imgui\imgui_demo.cpp" />
     <ClCompile Include="src\app\shared\libs\imgui\imgui_draw.cpp" />

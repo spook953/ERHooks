@@ -160,3 +160,59 @@ MAKE_ADDR
 
 	.Rip(1)
 );
+
+MAKE_ADDR
+(
+	er::bin,
+
+	WorldChrMan,
+
+	MemUtils::FindPatMod(
+		"eldenring.exe",
+		"48 8B 0D ? ? ? ? 48 85 C9 74 62 48 8B 89 ? ? ? ? 48 85 C9 74 56"
+	)
+
+	.Rip(3)
+);
+
+MAKE_ADDR
+(
+	er::bin,
+
+	CameraMatrix,
+
+	MemUtils::FindPatMod(
+		"eldenring.exe",
+		"B9 ? ? ? ? 48 23 C1 48 3D ? ? ? ? 75 47 48 8B 0D ? ? ? ? 48 85 C9 75 2E"
+	)
+
+	.Offset(16).Rip(3)
+);
+
+MAKE_ADDR
+(
+	er::bin,
+
+	UpdatePhysicsFunc,
+
+	MemUtils::FindPatMod(
+		"eldenring.exe",
+		"E8 ? ? ? ? 48 8D 4B 10 E8 ? ? ? ? EB 6E"
+	)
+
+	.Rip(1)
+);
+
+MAKE_ADDR
+(
+	er::bin,
+
+	ChrDeathFunc,
+
+	MemUtils::FindPatMod(
+		"eldenring.exe",
+		"E8 ? ? ? ? 84 C0 75 68 48 8B 0B"
+	)
+
+	.Rip(1)
+);

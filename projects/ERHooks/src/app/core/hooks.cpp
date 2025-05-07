@@ -169,3 +169,121 @@ MAKE_HOOK(
 
 	CALL_ORIGINAL(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
 }
+
+MAKE_HOOK(
+	UpdatePhysicsFunc,
+	er::bin::UpdatePhysicsFunc.Get(),
+	void,
+	void *thisptr)
+{
+	auto NoClip = [&]()
+	{
+		if (!Settings::no_clip) {
+			return false;
+		}
+
+		er::ChrModules *const modules{ er::GetLocalModules() };
+
+		if (!modules) {
+			return false;
+		}
+
+		er::CSChrPhysicsModule *const physics{ modules->m_char_physics() };
+
+		if (!physics || physics != thisptr) {
+			return false;
+		}
+
+		er::CSChrFallModule *const fall{ modules->m_fall() };
+
+		if (!fall) {
+			return false;
+		}
+
+		er::CameraMatrix *const cam{ er::GetCameraMatrix() };
+
+		if (!cam) {
+			return false;
+		}
+
+		if (!Menu::IsOpen())
+		{
+			physics->m_on_ground() = true;
+			fall->m_fall_timer() = 0.0f;
+
+			vec3_t forward{};
+			vec3_t right{};
+
+			Utils::AngleVectors(cam->m_angles(), &forward, &right);
+
+			const float speed{ Settings::no_clip_speed * (Input::GetKey(VK_SHIFT).held ? 5.0f : 1.0f) };
+
+			if (Input::GetKey('W').held) { physics->m_pos() += forward * speed; }
+			if (Input::GetKey('A').held) { physics->m_pos() += right * speed; }
+			if (Input::GetKey('S').held) { physics->m_pos() -= forward * speed; }
+			if (Input::GetKey('D').held) { physics->m_pos() -= right * speed; }
+
+			if (Input::GetKey(VK_SPACE).held) { physics->m_pos().y += speed; }
+			if (Input::GetKey(VK_CONTROL).held) { physics->m_pos().y -= speed; }
+		}
+
+		return true;
+	};
+
+	if (NoClip()) {
+		return;
+	}
+
+	CALL_ORIGINAL(thisptr);
+}
+
+MAKE_HOOK(
+	ChrDeathFunc,
+	er::bin::ChrDeathFunc.Get(),
+	bool,
+	void *thisptr)
+{
+	auto NoDeath = [&]()
+	{
+		if (!Settings::no_death) {
+			return false;
+		}
+
+		er::ChrModules *const modules{ er::GetLocalModules() };
+
+		if (!modules) {
+			return false;
+		}
+
+		er::CSCharData *const char_data{ modules->m_char_data() };
+
+		if (!char_data) {
+			return false;
+		}
+
+		return char_data == thisptr;
+	};
+
+	if (NoDeath()) {
+		return true;
+	}
+
+	return CALL_ORIGINAL(thisptr);
+}
+
+// triggers death effects?
+//MAKE_HOOK(
+//	IDFK,
+//	MemUtils::FindPatMod("eldenring.exe", "48 83 EC 28 44 0F B6 4A ?").Get(),
+//	void,
+//	__int64 a1, __int64 a2)
+//{
+//	static std::unordered_set<void *> calls{};
+//
+//	if (!calls.contains(_ReturnAddress())) {
+//		calls.insert(_ReturnAddress());
+//		Log::Wrn("called from : {:X}", (uintptr_t)_ReturnAddress());
+//	}
+//
+//	return;
+//}

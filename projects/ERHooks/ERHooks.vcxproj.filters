@@ -26,6 +26,7 @@
     <ClCompile Include="src\app\game\elden_ring\elden_ring_event_flags.cpp" />
     <ClCompile Include="src\app\shared\utils\utilfuncs.cpp" />
     <ClCompile Include="src\app\game\elden_ring\elden_ring_types.cpp" />
+    <ClCompile Include="src\app\game\game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app\app.hpp" />
