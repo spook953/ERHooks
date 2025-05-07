@@ -21,6 +21,8 @@
 - select great rune
 - activate rune arc
 - disable post processing effects
+- no clip
+- no death
 
 ## Libraries Used
 
