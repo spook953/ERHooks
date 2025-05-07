@@ -13,14 +13,10 @@
 
 - edit player attributes
 - add items to inventory
-- lock/unlock sites of grace
-- lock/unlock map pieces
-- lock/unlock cookbooks
-- lock/unlock affinities
-- kill/revive bosses
-- select great rune
-- activate rune arc
-- disable post processing effects
+- lock & unlock : sites of grace, map pieces, cookbooks, affinities
+- kill & revive bosses
+- select & activate great runes
+- disable post processing effects : chromatic aberration, vignette
 - no clip
 - no death
 
