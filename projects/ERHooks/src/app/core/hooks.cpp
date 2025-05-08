@@ -279,7 +279,7 @@ MAKE_HOOK(
 {
 	if (Settings::cam_dist_override_active)
 	{
-		TEMP_SET(*(float *)(a1 + 440), Settings::cam_dist_override_val);
+		TEMP_SET(*reinterpret_cast<float *>(a1 + 440), Settings::cam_dist_override_val);
 
 		return CALL_ORIGINAL(a1);
 	}
@@ -295,14 +295,14 @@ MAKE_HOOK(
 {
 	if (Settings::no_clip)
 	{
-		TEMP_SET(*(float *)(a1 + 460), 1.0f);
+		TEMP_SET(*reinterpret_cast<float *>(a1 + 460), 1.0f);
 
 		return CALL_ORIGINAL(a1, a2, a3, a4);
 	}
 
 	if (Settings::cam_smooth_override_active)
 	{
-		TEMP_SET(*(float *)(a1 + 460), Settings::cam_smooth_override_val);
+		TEMP_SET(*reinterpret_cast<float *>(a1 + 460), Settings::cam_smooth_override_val);
 
 		return CALL_ORIGINAL(a1, a2, a3, a4);
 	}
