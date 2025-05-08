@@ -221,7 +221,7 @@ MAKE_ADDR
 (
 	er::bin,
 
-	CamDistFunc,
+	CamUpdateFunc,
 
 	MemUtils::FindPatMod(
 		"eldenring.exe",

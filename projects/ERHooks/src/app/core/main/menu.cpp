@@ -469,6 +469,11 @@ void Menu::GameTab()
 		ImGui::SameLine();
 		ImGui::Checkbox("smooth override", &Settings::cam_smooth_override_active);
 
+		ImGui::SetNextItemWidth(150.0f);
+		ImGui::SliderFloat("##cam fov val", &Settings::cam_fov_override_val, 1.0f, 120.0f, "%.0f");
+		ImGui::SameLine();
+		ImGui::Checkbox("fov override", &Settings::cam_fov_override_active);
+
 		ImGui::Separator();
 
 		ImGui::EndTabItem();
