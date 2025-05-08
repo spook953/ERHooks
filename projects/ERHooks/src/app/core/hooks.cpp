@@ -271,6 +271,45 @@ MAKE_HOOK(
 	return CALL_ORIGINAL(thisptr);
 }
 
+MAKE_HOOK(
+	CamDistFunc,
+	er::bin::CamDistFunc.Get(),
+	void,
+	__int64 a1)
+{
+	if (Settings::cam_dist_override_active)
+	{
+		TEMP_SET(*(float *)(a1 + 440), Settings::cam_dist_override_val);
+
+		return CALL_ORIGINAL(a1);
+	}
+
+	CALL_ORIGINAL(a1);
+}
+
+MAKE_HOOK(
+	CamTrackFunc,
+	er::bin::CamTrackFunc.Get(),
+	void *,
+	__int64 a1, __int64 a2, __int64 a3, __m128 *a4)
+{
+	if (Settings::no_clip)
+	{
+		TEMP_SET(*(float *)(a1 + 460), 1.0f);
+
+		return CALL_ORIGINAL(a1, a2, a3, a4);
+	}
+
+	if (Settings::cam_smooth_override_active)
+	{
+		TEMP_SET(*(float *)(a1 + 460), Settings::cam_smooth_override_val);
+
+		return CALL_ORIGINAL(a1, a2, a3, a4);
+	}
+
+	return CALL_ORIGINAL(a1, a2, a3, a4);
+}
+
 // triggers death effects?
 //MAKE_HOOK(
 //	IDFK,

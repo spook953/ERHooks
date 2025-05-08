@@ -216,3 +216,31 @@ MAKE_ADDR
 
 	.Rip(1)
 );
+
+MAKE_ADDR
+(
+	er::bin,
+
+	CamDistFunc,
+
+	MemUtils::FindPatMod(
+		"eldenring.exe",
+		"E8 ? ? ? ? 0F 10 86 ? ? ? ? 48 8D 55 F0"
+	)
+
+	.Rip(1)
+);
+
+MAKE_ADDR
+(
+	er::bin,
+
+	CamTrackFunc,
+
+	MemUtils::FindPatMod(
+		"eldenring.exe",
+		"E8 ? ? ? ? F3 0F 10 8E ? ? ? ? 41 0F 28 D1"
+	)
+
+	.Rip(1)
+);

@@ -17,6 +17,7 @@
 - kill & revive bosses
 - select & activate great runes
 - disable post processing effects : chromatic aberration, vignette
+- edit camera distance & smoothing
 - no clip
 - no death
 

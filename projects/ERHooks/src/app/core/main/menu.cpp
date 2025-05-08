@@ -457,6 +457,23 @@ void Menu::GameTab()
 		ImGui::EndTabItem();
 	}
 
+	if (ImGui::BeginTabItem("camera"))
+	{
+		ImGui::SetNextItemWidth(150.0f);
+		ImGui::SliderFloat("##cam dist val", &Settings::cam_dist_override_val, 1.0f, 10.0f, "%.1f");
+		ImGui::SameLine();
+		ImGui::Checkbox("dist override", &Settings::cam_dist_override_active);
+
+		ImGui::SetNextItemWidth(150.0f);
+		ImGui::SliderFloat("##cam smooth val", &Settings::cam_smooth_override_val, 0.01f, 1.0f, "%.2f");
+		ImGui::SameLine();
+		ImGui::Checkbox("smooth override", &Settings::cam_smooth_override_active);
+
+		ImGui::Separator();
+
+		ImGui::EndTabItem();
+	}
+
 	ImGui::EndTabBar();
 }
 
