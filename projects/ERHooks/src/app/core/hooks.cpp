@@ -206,11 +206,11 @@ MAKE_HOOK(
 			return false;
 		}
 
+		physics->m_on_ground() = true;
+		fall->m_fall_timer() = 0.0f;
+
 		if (!Menu::IsOpen())
 		{
-			physics->m_on_ground() = true;
-			fall->m_fall_timer() = 0.0f;
-
 			vec3_t forward{};
 			vec3_t right{};
 
