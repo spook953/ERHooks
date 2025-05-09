@@ -159,11 +159,11 @@ MAKE_HOOK(
 	TEMP_SET_SELF(*reinterpret_cast<int *>(a1 + 216));
 	TEMP_SET_SELF(*reinterpret_cast<int *>(a1 + 272));
 
-	if (Settings::disable_chromatic_aberration) {
+	if (vars::disable_chromatic_aberration) {
 		*reinterpret_cast<int *>(a1 + 216) = 0;
 	}
 
-	if (Settings::disable_vignette) {
+	if (vars::disable_vignette) {
 		*reinterpret_cast<int *>(a1 + 272) = INT_MAX;
 	}
 
@@ -178,7 +178,7 @@ MAKE_HOOK(
 {
 	auto NoClip = [&]()
 	{
-		if (!Settings::no_clip) {
+		if (!vars::no_clip) {
 			return false;
 		}
 
@@ -216,7 +216,7 @@ MAKE_HOOK(
 
 			Utils::AngleVectors(cam->m_angles(), &forward, &right);
 
-			const float speed{ Settings::no_clip_speed * (Input::GetKey(VK_SHIFT).held ? 5.0f : 1.0f) };
+			const float speed{ vars::no_clip_speed * (Input::GetKey(VK_SHIFT).held ? 5.0f : 1.0f) };
 
 			if (Input::GetKey('W').held) { physics->m_pos() += forward * speed; }
 			if (Input::GetKey('A').held) { physics->m_pos() += right * speed; }
@@ -245,7 +245,7 @@ MAKE_HOOK(
 {
 	auto NoDeath = [&]()
 	{
-		if (!Settings::no_death) {
+		if (!vars::no_death) {
 			return false;
 		}
 
@@ -277,14 +277,14 @@ MAKE_HOOK(
 	void,
 	__int64 a1)
 {
-	if (Settings::cam_dist_override_active) {
-		*reinterpret_cast<float *>(a1 + 440) = Settings::cam_dist_override_val;
+	if (vars::cam_dist_override_active) {
+		*reinterpret_cast<float *>(a1 + 440) = vars::cam_dist_override_val;
 	}
 
 	CALL_ORIGINAL(a1);
 
-	if (Settings::cam_fov_override_active) {
-		*reinterpret_cast<float *>(a1 + 80) = Utils::DegToRad(Settings::cam_fov_override_val);
+	if (vars::cam_fov_override_active) {
+		*reinterpret_cast<float *>(a1 + 80) = Utils::DegToRad(vars::cam_fov_override_val);
 	}
 }
 
@@ -296,11 +296,11 @@ MAKE_HOOK(
 {
 	TEMP_SET_SELF(*reinterpret_cast<float *>(a1 + 460));
 
-	if (Settings::cam_smooth_override_active) {
-		*reinterpret_cast<float *>(a1 + 460) = Settings::cam_smooth_override_val;
+	if (vars::cam_smooth_override_active) {
+		*reinterpret_cast<float *>(a1 + 460) = vars::cam_smooth_override_val;
 	}
 
-	if (Settings::no_clip) {
+	if (vars::no_clip) {
 		*reinterpret_cast<float *>(a1 + 460) = 1.0f;
 	}
 

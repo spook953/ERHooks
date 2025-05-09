@@ -106,6 +106,7 @@
     <ClCompile Include="src\app\core\main\input.cpp" />
     <ClCompile Include="src\app\core\main\menu.cpp" />
     <ClCompile Include="src\app\core\main\renderer.cpp" />
+    <ClCompile Include="src\app\core\main\settings.cpp" />
     <ClCompile Include="src\app\game\elden_ring\elden_ring_event_flags.cpp" />
     <ClCompile Include="src\app\game\elden_ring\elden_ring_items.cpp" />
     <ClCompile Include="src\app\game\elden_ring\elden_ring_types.cpp" />
@@ -144,7 +145,9 @@
     <ClInclude Include="src\app\sdk\utils\make_addr.hpp" />
     <ClInclude Include="src\app\sdk\utils\make_hook.hpp" />
     <ClInclude Include="src\app\sdk\utils\make_member.hpp" />
+    <ClInclude Include="src\app\sdk\utils\make_var.hpp" />
     <ClInclude Include="src\app\shared\libs\imgui\imgui_freetype.hpp" />
+    <ClInclude Include="src\app\shared\libs\inifile-cpp\inicpp.hpp" />
     <ClInclude Include="src\app\shared\utils\instance.hpp" />
     <ClInclude Include="src\app\shared\libs\imgui\imconfig.hpp" />
     <ClInclude Include="src\app\shared\libs\imgui\imgui.hpp" />

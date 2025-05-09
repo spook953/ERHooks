@@ -15,8 +15,7 @@ private:
 
 public:
 	Hook(std::string_view name, const std::function<bool()> &init_fn)
-		: m_name(name), m_init_fn(init_fn), Instance(this) {
-	}
+		: m_name(name), m_init_fn(init_fn), Instance(this) {}
 
 public:
 	bool Create(void *const src, void *const dst)

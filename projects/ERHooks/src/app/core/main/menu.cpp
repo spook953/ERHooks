@@ -317,15 +317,15 @@ void Menu::PlayerMisc()
 	}
 
 	ImGui::SetNextItemWidth(150.0f);
-	ImGui::SliderFloat("##no clip speed", &Settings::no_clip_speed, 0.1f, 1.0f, "%.1f");
+	ImGui::SliderFloat("##no clip speed", &vars::no_clip_speed, 0.1f, 1.0f, "%.1f");
 
 	ImGui::SameLine();
 
-	ImGui::Checkbox("no clip active", &Settings::no_clip);
+	ImGui::Checkbox("no clip active", &vars::no_clip);
 
 	ImGui::Separator();
 
-	ImGui::Checkbox("no death", &Settings::no_death);
+	ImGui::Checkbox("no death", &vars::no_death);
 
 	ImGui::Separator();
 }
@@ -449,8 +449,8 @@ void Menu::GameTab()
 
 	if (ImGui::BeginTabItem("post-processing"))
 	{
-		ImGui::Checkbox("disable chromatic aberration", &Settings::disable_chromatic_aberration);
-		ImGui::Checkbox("disable vignette", &Settings::disable_vignette);
+		ImGui::Checkbox("disable chromatic aberration", &vars::disable_chromatic_aberration);
+		ImGui::Checkbox("disable vignette", &vars::disable_vignette);
 
 		ImGui::Separator();
 
@@ -460,19 +460,19 @@ void Menu::GameTab()
 	if (ImGui::BeginTabItem("camera"))
 	{
 		ImGui::SetNextItemWidth(150.0f);
-		ImGui::SliderFloat("##cam dist val", &Settings::cam_dist_override_val, 1.0f, 10.0f, "%.1f");
+		ImGui::SliderFloat("##cam dist val", &vars::cam_dist_override_val, 1.0f, 10.0f, "%.1f");
 		ImGui::SameLine();
-		ImGui::Checkbox("dist override", &Settings::cam_dist_override_active);
+		ImGui::Checkbox("dist override", &vars::cam_dist_override_active);
 
 		ImGui::SetNextItemWidth(150.0f);
-		ImGui::SliderFloat("##cam smooth val", &Settings::cam_smooth_override_val, 0.01f, 1.0f, "%.2f");
+		ImGui::SliderFloat("##cam smooth val", &vars::cam_smooth_override_val, 0.01f, 1.0f, "%.2f");
 		ImGui::SameLine();
-		ImGui::Checkbox("smooth override", &Settings::cam_smooth_override_active);
+		ImGui::Checkbox("smooth override", &vars::cam_smooth_override_active);
 
 		ImGui::SetNextItemWidth(150.0f);
-		ImGui::SliderFloat("##cam fov val", &Settings::cam_fov_override_val, 1.0f, 120.0f, "%.0f");
+		ImGui::SliderFloat("##cam fov val", &vars::cam_fov_override_val, 1.0f, 120.0f, "%.0f");
 		ImGui::SameLine();
-		ImGui::Checkbox("fov override", &Settings::cam_fov_override_active);
+		ImGui::Checkbox("fov override", &vars::cam_fov_override_active);
 
 		ImGui::Separator();
 
@@ -513,8 +513,13 @@ void Menu::MainWindow()
 
 void Menu::Run()
 {
-	if (Input::GetKey(VK_INSERT).pressed) {
+	if (Input::GetKey(VK_INSERT).pressed)
+	{
 		is_open = !is_open;
+
+		if (!is_open) {
+			Settings::Save();
+		}
 	}
 
 	ImGui::GetIO().MouseDrawCursor = is_open;

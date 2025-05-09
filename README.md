@@ -29,6 +29,8 @@
 
 [**MinHook**](https://github.com/TsudaKageyu/minhook)
 
+[**inifile-cpp**](https://github.com/Rookfighter/inifile-cpp)
+
 ## Screenshots
 
 ![Alt Text](https://i.imgur.com/6qBV072.png)

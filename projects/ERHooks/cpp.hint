@@ -1,3 +1,4 @@
-#define MAKE_ADDR(name_space, name, addr_fn)
+#define MAKE_ADDR(scope, name, addr_fn)
 #define MAKE_HOOK(name, address, type, ...)
 #define MAKE_MEMBER(type, name, offset)
+#define MAKE_VAR(name, val)

@@ -68,6 +68,8 @@ bool App::Load()
 		return false;
 	}
 
+	Settings::Load();
+
 	Log::Oke("loaded!");
 
 	return true;
