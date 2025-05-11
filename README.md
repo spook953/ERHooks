@@ -9,7 +9,7 @@
 3. press INSERT to open the menu
 4. press F11 to unload
 
-## Features (WIP)
+## Features
 
 - edit player attributes
 - add items to inventory
