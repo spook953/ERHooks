@@ -144,7 +144,7 @@ void Menu::ItemSpawner(const er::ItemType item_type, const er::items::item_map_t
 	}
 }
 
-void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char *const filter_input, const event_flag_edit_data_t &data)
+void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char *const filter_input)
 {
 	er::EventFlagMan *const event_flags{ er::GetEventFlagMan() };
 
@@ -157,14 +157,14 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 
 	const ImVec2 button_w{ (ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x) * 0.5f, 0.0f };
 
-	if (ImGui::Button(data.all_on.c_str(), button_w)) {
+	if (ImGui::Button("unlock all", button_w)) {
 		ImGui::OpenPopup("are you sure?###confirm_unlock");
 		confirm_unlock = true;
 	}
 
 	ImGui::SameLine();
 
-	if (ImGui::Button(data.all_off.c_str(), button_w)) {
+	if (ImGui::Button("lock all", button_w)) {
 		ImGui::OpenPopup("are you sure?###confirm_lock");
 		confirm_lock = true;
 	}
@@ -231,10 +231,126 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 
 			ImGui::TableNextRow();
 			ImGui::TableSetColumnIndex(1);
-			ImGui::Text("%s", is_set ? data.flag_on.c_str() : data.flag_off.c_str());
+			ImGui::Text("%s", is_set ? "unlocked" : "locked");
 			ImGui::TableSetColumnIndex(0);
 
 			ImGui::PushID(id);		
+			ImGui::Selectable(name.c_str());
+			ImGui::PopID();
+
+			if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
+				event_flags->SetFlag(id, !is_set);
+			}
+		}
+
+		ImGui::EndTable();
+	}
+}
+
+void Menu::BossEventFlagEditor(char *const filter_input)
+{
+	er::EventFlagMan *const event_flags{ er::GetEventFlagMan() };
+
+	if (!event_flags) {
+		return;
+	}
+
+	static bool confirm_unlock{};
+	static bool confirm_lock{};
+
+	const ImVec2 button_w{ (ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x) * 0.5f, 0.0f };
+
+	if (ImGui::Button("kill all", button_w)) {
+		ImGui::OpenPopup("are you sure?###confirm_unlock");
+		confirm_unlock = true;
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("revive all", button_w)) {
+		ImGui::OpenPopup("are you sure?###confirm_lock");
+		confirm_lock = true;
+	}
+
+	static std::vector<std::pair<uint32_t, std::string>> all_flags{};
+
+	if (all_flags.empty())
+	{
+		for (const auto &[category, flags] : er::bosses::GetBaseBosses()) {
+			all_flags.insert(all_flags.end(), flags.begin(), flags.end());
+		}
+
+		for (const auto &[category, flags] : er::bosses::GetDLCBosses()) {
+			all_flags.insert(all_flags.end(), flags.begin(), flags.end());
+		}
+	}
+
+	auto ConfirmPopup = [](const char *const popup_name, bool *const open_flag, const std::function<void()> &on_confirm)
+	{
+		ImGui::SetNextWindowSize({ 200.0f, 0.0f });
+
+		const std::string name{ std::string{ "are you sure?###" } + popup_name };
+
+		if (ImGui::BeginPopupModal(name.c_str(), open_flag))
+		{
+			const ImVec2 button_w{ (ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x) * 0.5f, 0.0f };
+
+			if (ImGui::Button("yes", button_w)) {
+				on_confirm();
+				*open_flag = false;
+			}
+
+			ImGui::SameLine();
+
+			if (ImGui::Button("no", button_w)) {
+				*open_flag = false;
+			}
+
+			ImGui::EndPopup();
+		}
+	};
+
+	ConfirmPopup("confirm_unlock", &confirm_unlock, [&]()
+	{
+		for (const auto &[id, name] : all_flags) {
+			event_flags->SetFlag(id, true);
+		}
+	});
+
+	ConfirmPopup("confirm_lock", &confirm_lock, [&]()
+	{
+		for (const auto &[id, name] : all_flags) {
+			event_flags->SetFlag(id, false);
+		}
+	});
+
+	ImGui::PushItemWidth(-1.0f);
+	ImGui::InputTextWithHint("##filter", "filter", filter_input, 50);
+	ImGui::PopItemWidth();
+
+	const std::string filter{ Utils::ToLower(filter_input) };
+
+	if (ImGui::BeginTable("flag_table", 2, ImGuiTableFlags_ScrollY | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV))
+	{
+		ImGui::TableSetupScrollFreeze(0, 1);
+		ImGui::TableSetupColumn("name", ImGuiTableColumnFlags_WidthFixed | ImGuiTableColumnFlags_DefaultSort, 350.0f);
+		ImGui::TableSetupColumn("state");
+		ImGui::TableHeadersRow();
+
+		for (const auto &[id, name] : all_flags)
+		{
+			if (!filter.empty() && !Utils::ToLower(name).contains(filter)) {
+				continue;
+			}
+
+			const bool is_set{ event_flags->GetFlag(id) };
+
+			ImGui::TableNextRow();
+			ImGui::TableSetColumnIndex(1);
+			ImGui::Text("%s", is_set ? "dead" : "alive");
+			ImGui::TableSetColumnIndex(0);
+
+			ImGui::PushID(id);
 			ImGui::Selectable(name.c_str());
 			ImGui::PopID();
 
@@ -397,25 +513,25 @@ void Menu::ProgressionTab()
 
 	if (ImGui::BeginTabItem("sites of grace")) {
 		static char filter[128]{};
-		EventFlagEditor(er::event_flags::GetGraceMap(), filter, { "unlocked", "locked", "unlock all", "lock all" });
+		EventFlagEditor(er::event_flags::GetGraceMap(), filter);
 		ImGui::EndTabItem();
 	}
 
 	if (ImGui::BeginTabItem("map pieces")) {
 		static char filter[128]{};
-		EventFlagEditor(er::event_flags::GetMapPieceMap(), filter, { "unlocked", "locked", "unlock all", "lock all" });
+		EventFlagEditor(er::event_flags::GetMapPieceMap(), filter);
 		ImGui::EndTabItem();
 	}
 
 	if (ImGui::BeginTabItem("cookbooks")) {
 		static char filter[128]{};
-		EventFlagEditor(er::event_flags::GetCookBookMap(), filter, { "unlocked", "locked", "unlock all", "lock all" });
+		EventFlagEditor(er::event_flags::GetCookBookMap(), filter);
 		ImGui::EndTabItem();
 	}
 
 	if (ImGui::BeginTabItem("affinities")) {
 		static char filter[128]{};
-		EventFlagEditor(er::event_flags::GetAffinitiesMap(), filter, { "unlocked", "locked", "unlock all", "lock all" });
+		EventFlagEditor(er::event_flags::GetAffinitiesMap(), filter);
 		ImGui::EndTabItem();
 	}
 
@@ -429,7 +545,7 @@ void Menu::ProgressionTab()
 
 		static char filter[128]{};
 
-		EventFlagEditor(er::event_flags::GetBossDefeatedMap(), filter, { "dead", "alive", "kill all", "revive all" });
+		BossEventFlagEditor(filter);
 
 		const bool malenia_cur{ event_flags->GetFlag(er::event_flags::special::GetMaleniaDefeatedFlag()) };
 

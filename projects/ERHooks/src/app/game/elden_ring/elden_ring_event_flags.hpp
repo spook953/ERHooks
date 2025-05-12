@@ -10,7 +10,6 @@ namespace er::event_flags
 	const event_flag_map_t &GetMapPieceMap();
 	const event_flag_map_t &GetCookBookMap();
 	const event_flag_map_t &GetAffinitiesMap();
-	const event_flag_map_t &GetBossDefeatedMap();
 
 	namespace special
 	{
