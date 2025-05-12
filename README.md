@@ -19,6 +19,7 @@
 - select & activate great runes
 - disable post processing effects : chromatic aberration, vignette
 - edit camera : distance, smoothing, fov
+- select ng+
 - no clip
 - no death
 

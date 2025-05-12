@@ -2,7 +2,13 @@
 
 void Menu::AttributeEditor()
 {
-	er::ChrGameData *const chr_data{ er::GetGameDataMan() ? er::GetGameDataMan()->m_chr_data() : nullptr };
+	er::GameDataMan *const game_data{ er::GetGameDataMan() };
+
+	if (!game_data) {
+		return;
+	}
+
+	er::ChrGameData *const chr_data{ game_data->m_chr_data() };
 
 	if (!chr_data) {
 		return;
@@ -575,8 +581,25 @@ void Menu::ProgressionTab()
 
 void Menu::GameTab()
 {
+	er::GameDataMan *const game_data{ er::GetGameDataMan() };
+
+	if (!game_data) {
+		return;
+	}
+
 	if (!ImGui::BeginTabBar("game_tabs")) {
 		return;
+	}
+
+	if (ImGui::BeginTabItem("general"))
+	{
+		ImGui::SetNextItemWidth(150.0f);
+
+		if (ImGui::InputInt("journey (ng+)", &game_data->m_journey_nr())) {
+			game_data->m_journey_nr() = std::clamp(game_data->m_journey_nr(), 0, std::numeric_limits<int32_t>::max());
+		}
+
+		ImGui::EndTabItem();
 	}
 
 	if (ImGui::BeginTabItem("post-processing"))

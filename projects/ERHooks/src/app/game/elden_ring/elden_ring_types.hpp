@@ -65,6 +65,9 @@ namespace er
 	{
 	public:
 		MAKE_MEMBER(ChrGameData *, m_chr_data, 8);
+		MAKE_MEMBER(uint32_t, m_death_count, 148);
+		MAKE_MEMBER(uint32_t, m_play_time_ms, 160);
+		MAKE_MEMBER(int32_t, m_journey_nr, 288);
 	};
 
 	class MapItemMan
