@@ -33,6 +33,6 @@
 
 [**inifile-cpp**](https://github.com/Rookfighter/inifile-cpp)
 
-## Screenshots
+## In-Game
 
-![Alt Text](https://i.imgur.com/FRZnas1.png)
+![Alt Text](https://i.imgur.com/QNdRHfk.png)
