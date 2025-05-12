@@ -14,6 +14,8 @@ void Menu::AttributeEditor()
 		return;
 	}
 
+	ImGui::BeginDisabled(!vars::edit_mode_active);
+
 	if (ImGui::InputInt("level", &chr_data->m_stats().m_level(), 1, 1)) {
 		chr_data->m_stats().m_level() = std::clamp(chr_data->m_stats().m_level(), 1, 713);
 	}
@@ -71,6 +73,10 @@ void Menu::AttributeEditor()
 	if (ImGui::InputInt("arcane", &chr_data->m_stats().m_arcane(), 1, 1)) {
 		chr_data->m_stats().m_arcane() = std::clamp(chr_data->m_stats().m_arcane(), 1, 99);
 	}
+
+	ImGui::Separator();
+
+	ImGui::EndDisabled();
 }
 
 void Menu::ItemSpawner(const er::ItemType item_type, const er::items::item_map_t &items)
@@ -107,6 +113,8 @@ void Menu::ItemSpawner(const er::ItemType item_type, const er::items::item_map_t
 			if (!filter.empty() && !Utils::ToLower(name).contains(filter)) {
 				continue;
 			}
+
+			ImGui::BeginDisabled(!vars::edit_mode_active);
 
 			ImGui::TableNextRow();
 			ImGui::TableSetColumnIndex(0);
@@ -150,6 +158,8 @@ void Menu::ItemSpawner(const er::ItemType item_type, const er::items::item_map_t
 			}
 
 			ImGui::PopID();
+
+			ImGui::EndDisabled();
 		}
 
 		ImGui::EndTable();
@@ -163,6 +173,8 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 	if (!event_flags) {
 		return;
 	}
+
+	ImGui::BeginDisabled(!vars::edit_mode_active);
 
 	static bool confirm_unlock{};
 	static bool confirm_lock{};
@@ -206,6 +218,8 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 		}
 	};
 
+	ImGui::BeginDisabled(!vars::edit_mode_active);
+
 	ConfirmPopup("confirm_unlock", &confirm_unlock, [&]()
 	{
 		for (const auto &[id, name] : flags) {
@@ -219,6 +233,8 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 			event_flags->SetFlag(id, false);
 		}
 	});
+
+	ImGui::EndDisabled();
 
 	ImGui::PushItemWidth(-1.0f);
 	ImGui::InputTextWithHint("##filter", "filter", filter_input, 50);
@@ -239,6 +255,8 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 				continue;
 			}
 
+			ImGui::BeginDisabled(!vars::edit_mode_active);
+
 			const bool is_set{ event_flags->GetFlag(id) };
 
 			ImGui::TableNextRow();
@@ -253,10 +271,14 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 			if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
 				event_flags->SetFlag(id, !is_set);
 			}
+
+			ImGui::EndDisabled();
 		}
 
 		ImGui::EndTable();
 	}
+
+	ImGui::EndDisabled();
 }
 
 void Menu::BossEventFlagEditor(char *const filter_input)
@@ -272,6 +294,8 @@ void Menu::BossEventFlagEditor(char *const filter_input)
 
 	const ImVec2 button_w{ (ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x) * 0.5f, 0.0f };
 
+	ImGui::BeginDisabled(!vars::edit_mode_active);
+
 	if (ImGui::Button("kill all", button_w)) {
 		ImGui::OpenPopup("are you sure?###confirm_unlock");
 		confirm_unlock = true;
@@ -283,6 +307,8 @@ void Menu::BossEventFlagEditor(char *const filter_input)
 		ImGui::OpenPopup("are you sure?###confirm_lock");
 		confirm_lock = true;
 	}
+
+	ImGui::EndDisabled();
 
 	static std::vector<std::pair<uint32_t, std::string>> all_flags{};
 
@@ -355,6 +381,8 @@ void Menu::BossEventFlagEditor(char *const filter_input)
 				continue;
 			}
 
+			ImGui::BeginDisabled(!vars::edit_mode_active);
+
 			const bool is_set{ event_flags->GetFlag(id) };
 
 			ImGui::TableNextRow();
@@ -369,6 +397,8 @@ void Menu::BossEventFlagEditor(char *const filter_input)
 			if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
 				event_flags->SetFlag(id, !is_set);
 			}
+
+			ImGui::EndDisabled();
 		}
 
 		ImGui::EndTable();
@@ -388,6 +418,8 @@ void Menu::PlayerMisc()
 	if (!chr_data) {
 		return;
 	}
+
+	ImGui::BeginDisabled(!vars::edit_mode_active);
 
 	// great rune
 	{
@@ -456,6 +488,8 @@ void Menu::PlayerMisc()
 	ImGui::Checkbox("no death", &vars::no_death);
 
 	ImGui::Separator();
+
+	ImGui::EndDisabled();
 }
 
 void Menu::PlayerTab()
@@ -547,8 +581,6 @@ void Menu::ProgressionTab()
 		ImGui::EndTabItem();
 	}
 
-	static ImVec2 boss_tracker_cb_pos{};
-
 	if (ImGui::BeginTabItem("bosses"))
 	{
 		// special handling for the flower that spawns afer Malenia's defeat
@@ -568,20 +600,6 @@ void Menu::ProgressionTab()
 		ImGui::EndTabItem();
 	}
 
-	else
-	{
-		ImGui::SameLine();
-
-		boss_tracker_cb_pos = ImGui::GetCursorPos();
-	}
-
-	// can't get it to work otherwise...
-	{
-		ImGui::SetCursorPos(boss_tracker_cb_pos);
-
-		ImGui::Checkbox("show boss tracker", &vars::boss_tracker_active);
-	}
-
 	ImGui::EndTabBar();
 }
 
@@ -599,11 +617,17 @@ void Menu::GameTab()
 
 	if (ImGui::BeginTabItem("general"))
 	{
+		ImGui::BeginDisabled(!vars::edit_mode_active);
+
 		ImGui::SetNextItemWidth(150.0f);
 
 		if (ImGui::InputInt("journey (ng+)", &game_data->m_journey_nr())) {
 			game_data->m_journey_nr() = std::clamp(game_data->m_journey_nr(), 0, std::numeric_limits<int32_t>::max());
 		}
+
+		ImGui::Separator();
+
+		ImGui::EndDisabled();
 
 		ImGui::EndTabItem();
 	}
@@ -703,6 +727,34 @@ void Menu::Run()
 		}
 
 		return;
+	}
+
+	ImGui::SetNextWindowPos({ 10.0f, 10.0f });
+	ImGui::SetNextWindowSize({ 150.0f, 0.0f });
+
+	if (ImGui::Begin("small_window", nullptr, ImGuiWindowFlags_NoDecoration))
+	{
+		ImGui::TextUnformatted(std::format("build ( {} )", __DATE__).c_str());
+
+		ImGui::Separator();
+
+		ImGui::Checkbox("edit mode", &vars::edit_mode_active);
+
+		ImGui::SameLine();
+
+		ImGui::TextDisabled("(?)");
+
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("if you care about the current save file, back it up");
+		}
+
+		ImGui::Separator();
+
+		ImGui::Checkbox("show boss tracker", &vars::boss_tracker_active);
+
+		ImGui::Separator();
+
+		ImGui::End();
 	}
 
 	ImGui::SetNextWindowSize({ 550.0f, 400.0f });

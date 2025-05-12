@@ -8,6 +8,7 @@ struct Settings final
 	static void Load();
 };
 
+MAKE_VAR(edit_mode_active, false);
 MAKE_VAR(boss_tracker_active, true);
 
 MAKE_VAR(disable_chromatic_aberration, false);
