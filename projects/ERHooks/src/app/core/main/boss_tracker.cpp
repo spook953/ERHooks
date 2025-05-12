@@ -34,9 +34,11 @@ void BossTracker::DrawProgress(const er::bosses::boss_map_t &data, std::string_v
 		}
 	}
 
+	const float bar_w{ ImGui::GetIO().DisplaySize.x * 0.1f };
+
 	TextOutlined(std::format("{} ( {} / {} )", name.data(), sum_defeated, sum));
 
-	ImGui::ProgressBar(static_cast<float>(sum_defeated) / static_cast<float>(sum), { 200.0f, 5.0f });
+	ImGui::ProgressBar(static_cast<float>(sum_defeated) / static_cast<float>(sum), { bar_w, 5.0f });
 
 	for (const auto &entry : data)
 	{
@@ -56,7 +58,7 @@ void BossTracker::DrawProgress(const er::bosses::boss_map_t &data, std::string_v
 		const ImVec2 text_min{ ImGui::GetItemRectMin() };
 		const ImVec2 text_max{ ImGui::GetItemRectMax() };
 
-		ImGui::ProgressBar(static_cast<float>(defeated) / static_cast<float>(total), { 200.0f, 5.0f });
+		ImGui::ProgressBar(static_cast<float>(defeated) / static_cast<float>(total), { bar_w, 5.0f });
 
 		const ImVec2 bar_min{ ImGui::GetItemRectMin() };
 		const ImVec2 bar_max{ ImGui::GetItemRectMax() };

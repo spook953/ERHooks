@@ -732,20 +732,30 @@ void Menu::Run()
 	ImGui::SetNextWindowPos({ 10.0f, 10.0f });
 	ImGui::SetNextWindowSize({ 150.0f, 0.0f });
 
-	if (ImGui::Begin("small_window", nullptr, ImGuiWindowFlags_NoDecoration))
+	if (ImGui::Begin("ERHooksSmall", nullptr, ImGuiWindowFlags_NoDecoration))
 	{
 		ImGui::TextUnformatted(std::format("build ( {} )", __DATE__).c_str());
 
 		ImGui::Separator();
 
-		ImGui::Checkbox("edit mode", &vars::edit_mode_active);
+		if (ImGui::Checkbox("edit mode", &vars::edit_mode_active))
+		{
+			if (!vars::edit_mode_active) {
+				vars::no_clip = false;
+			}
+		}
 
 		ImGui::SameLine();
 
 		ImGui::TextDisabled("(?)");
 
-		if (ImGui::IsItemHovered()) {
-			ImGui::SetTooltip("if you care about the current save file, back it up");
+		if (ImGui::IsItemHovered())
+		{
+			ImGui::SetTooltip
+			(
+				"if you care about the current save file, back it up\n"
+				"save file friendly options are still available, even if this is disabled"
+			);
 		}
 
 		ImGui::Separator();
