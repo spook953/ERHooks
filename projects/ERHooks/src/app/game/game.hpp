@@ -1,5 +1,6 @@
 #pragma once
 
+#include "elden_ring/elden_ring_bosses.hpp"
 #include "elden_ring/elden_ring_event_flags.hpp"
 #include "elden_ring/elden_ring_items.hpp"
 

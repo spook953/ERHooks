@@ -13,6 +13,7 @@
 
 - edit player attributes
 - add items to inventory
+- boss tracker
 - lock & unlock : sites of grace, map pieces, cookbooks, affinities
 - kill & revive bosses
 - select & activate great runes
@@ -33,4 +34,4 @@
 
 ## Screenshots
 
-![Alt Text](https://i.imgur.com/6qBV072.png)
+![Alt Text](https://i.imgur.com/FRZnas1.png)

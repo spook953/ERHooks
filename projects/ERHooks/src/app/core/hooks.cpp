@@ -13,6 +13,7 @@ MAKE_HOOK(
 	if (Renderer::Start())
 	{
 		Menu::Run();
+		BossTracker::Run();
 
 		Renderer::End();
 	}

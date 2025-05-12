@@ -14,3 +14,6 @@
 #include "utils/memutils.hpp"
 #include "utils/utilfuncs.hpp"
 #include "utils/vec.hpp"
+
+#undef min
+#undef max

@@ -103,10 +103,12 @@
   <ItemGroup>
     <ClCompile Include="src\app\app.cpp" />
     <ClCompile Include="src\app\core\hooks.cpp" />
+    <ClCompile Include="src\app\core\main\boss_tracker.cpp" />
     <ClCompile Include="src\app\core\main\input.cpp" />
     <ClCompile Include="src\app\core\main\menu.cpp" />
     <ClCompile Include="src\app\core\main\renderer.cpp" />
     <ClCompile Include="src\app\core\main\settings.cpp" />
+    <ClCompile Include="src\app\game\elden_ring\elden_ring_bosses.cpp" />
     <ClCompile Include="src\app\game\elden_ring\elden_ring_event_flags.cpp" />
     <ClCompile Include="src\app\game\elden_ring\elden_ring_items.cpp" />
     <ClCompile Include="src\app\game\elden_ring\elden_ring_types.cpp" />
@@ -132,10 +134,12 @@
   <ItemGroup>
     <ClInclude Include="src\app\app.hpp" />
     <ClInclude Include="src\app\core\hooks.hpp" />
+    <ClInclude Include="src\app\core\main\boss_tracker.hpp" />
     <ClInclude Include="src\app\core\main\input.hpp" />
     <ClInclude Include="src\app\core\main\menu.hpp" />
     <ClInclude Include="src\app\core\main\settings.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_bin.hpp" />
+    <ClInclude Include="src\app\game\elden_ring\elden_ring_bosses.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_event_flags.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_items.hpp" />
     <ClInclude Include="src\app\game\elden_ring\elden_ring_types.hpp" />

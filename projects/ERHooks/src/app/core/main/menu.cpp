@@ -419,6 +419,8 @@ void Menu::ProgressionTab()
 		ImGui::EndTabItem();
 	}
 
+	static ImVec2 boss_tracker_cb_pos{};
+
 	if (ImGui::BeginTabItem("bosses"))
 	{
 		// special handling for the flower that spawns afer Malenia's defeat
@@ -436,6 +438,20 @@ void Menu::ProgressionTab()
 		}
 
 		ImGui::EndTabItem();
+	}
+
+	else
+	{
+		ImGui::SameLine();
+
+		boss_tracker_cb_pos = ImGui::GetCursorPos();
+	}
+
+	// can't get it to work otherwise...
+	{
+		ImGui::SetCursorPos(boss_tracker_cb_pos);
+
+		ImGui::Checkbox("show boss tracker", &vars::boss_tracker_active);
 	}
 
 	ImGui::EndTabBar();
