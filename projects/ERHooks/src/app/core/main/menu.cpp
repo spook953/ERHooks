@@ -20,6 +20,12 @@ void Menu::AttributeEditor()
 
 	ImGui::Separator();
 
+	if (ImGui::InputInt("runes", &chr_data->m_runes(), 1, 1, ImGuiInputTextFlags_EnterReturnsTrue)) {
+		chr_data->m_runes() = std::clamp(chr_data->m_runes(), 0, 999999999);
+	}
+
+	ImGui::Separator();
+
 	int temp_scadu{ static_cast<int>(chr_data->m_stats().m_scadutree_blessing()) };
 
 	if (ImGui::InputInt("scadutree blessing", &temp_scadu, 1, 1)) {

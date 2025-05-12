@@ -57,6 +57,7 @@ namespace er
 	{
 	public:
 		MAKE_MEMBER(ChrStats, m_stats, 60);
+		MAKE_MEMBER(int32_t, m_runes, 108);
 		MAKE_MEMBER(bool, m_rune_arc_active, 255);
 		MAKE_MEMBER(uint32_t, m_great_rune, 1472);
 	};
