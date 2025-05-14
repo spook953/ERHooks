@@ -35,4 +35,4 @@
 
 ## In-Game
 
-![Alt Text](https://i.imgur.com/QNdRHfk.png)
+![Alt Text](https://i.imgur.com/a8ph8IQ.png)

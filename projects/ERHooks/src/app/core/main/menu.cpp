@@ -14,7 +14,7 @@ void Menu::AttributeEditor()
 		return;
 	}
 
-	ImGui::BeginDisabled(!vars::edit_mode_active);
+	ImGui::BeginDisabled(!vars::allow_cheating);
 
 	if (ImGui::InputInt("level", &chr_data->m_stats().m_level(), 1, 1)) {
 		chr_data->m_stats().m_level() = std::clamp(chr_data->m_stats().m_level(), 1, 713);
@@ -114,7 +114,7 @@ void Menu::ItemSpawner(const er::ItemType item_type, const er::items::item_map_t
 				continue;
 			}
 
-			ImGui::BeginDisabled(!vars::edit_mode_active);
+			ImGui::BeginDisabled(!vars::allow_cheating);
 
 			ImGui::TableNextRow();
 			ImGui::TableSetColumnIndex(0);
@@ -174,12 +174,12 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 		return;
 	}
 
-	ImGui::BeginDisabled(!vars::edit_mode_active);
-
 	static bool confirm_unlock{};
 	static bool confirm_lock{};
 
 	const ImVec2 button_w{ (ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x) * 0.5f, 0.0f };
+
+	ImGui::BeginDisabled(!vars::allow_cheating);
 
 	if (ImGui::Button("unlock all", button_w)) {
 		ImGui::OpenPopup("are you sure?###confirm_unlock");
@@ -192,6 +192,8 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 		ImGui::OpenPopup("are you sure?###confirm_lock");
 		confirm_lock = true;
 	}
+
+	ImGui::EndDisabled();
 
 	auto ConfirmPopup = [](const char *const popup_name, bool *const open_flag, const std::function<void()> &on_confirm)
 	{
@@ -218,8 +220,6 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 		}
 	};
 
-	ImGui::BeginDisabled(!vars::edit_mode_active);
-
 	ConfirmPopup("confirm_unlock", &confirm_unlock, [&]()
 	{
 		for (const auto &[id, name] : flags) {
@@ -233,8 +233,6 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 			event_flags->SetFlag(id, false);
 		}
 	});
-
-	ImGui::EndDisabled();
 
 	ImGui::PushItemWidth(-1.0f);
 	ImGui::InputTextWithHint("##filter", "filter", filter_input, 50);
@@ -255,7 +253,7 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 				continue;
 			}
 
-			ImGui::BeginDisabled(!vars::edit_mode_active);
+			ImGui::BeginDisabled(!vars::allow_cheating);
 
 			const bool is_set{ event_flags->GetFlag(id) };
 
@@ -277,8 +275,6 @@ void Menu::EventFlagEditor(const er::event_flags::event_flag_map_t &flags, char 
 
 		ImGui::EndTable();
 	}
-
-	ImGui::EndDisabled();
 }
 
 void Menu::BossEventFlagEditor(char *const filter_input)
@@ -294,7 +290,7 @@ void Menu::BossEventFlagEditor(char *const filter_input)
 
 	const ImVec2 button_w{ (ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x) * 0.5f, 0.0f };
 
-	ImGui::BeginDisabled(!vars::edit_mode_active);
+	ImGui::BeginDisabled(!vars::allow_cheating);
 
 	if (ImGui::Button("kill all", button_w)) {
 		ImGui::OpenPopup("are you sure?###confirm_unlock");
@@ -381,7 +377,7 @@ void Menu::BossEventFlagEditor(char *const filter_input)
 				continue;
 			}
 
-			ImGui::BeginDisabled(!vars::edit_mode_active);
+			ImGui::BeginDisabled(!vars::allow_cheating);
 
 			const bool is_set{ event_flags->GetFlag(id) };
 
@@ -419,7 +415,7 @@ void Menu::PlayerMisc()
 		return;
 	}
 
-	ImGui::BeginDisabled(!vars::edit_mode_active);
+	ImGui::BeginDisabled(!vars::allow_cheating);
 
 	// great rune
 	{
@@ -617,7 +613,7 @@ void Menu::GameTab()
 
 	if (ImGui::BeginTabItem("general"))
 	{
-		ImGui::BeginDisabled(!vars::edit_mode_active);
+		ImGui::BeginDisabled(!vars::allow_cheating);
 
 		ImGui::SetNextItemWidth(150.0f);
 
@@ -721,7 +717,7 @@ void Menu::Run()
 
 		if (ImGui::BeginPopupModal("ERHooks", &is_open, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize))
 		{
-			ImGui::Text("you must be in game to use the menu");
+			ImGui::Text("you must be in game to use ERHooks");
 
 			ImGui::EndPopup();
 		}
@@ -730,49 +726,40 @@ void Menu::Run()
 	}
 
 	ImGui::SetNextWindowPos({ 10.0f, 10.0f });
-	ImGui::SetNextWindowSize({ 150.0f, 0.0f });
+	ImGui::SetNextWindowSize({ 200.0f, 0.0f });
 
-	if (ImGui::Begin("ERHooksSmall", nullptr, ImGuiWindowFlags_NoDecoration))
+	if (ImGui::Begin(__DATE__, nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize))
 	{
-		ImGui::TextUnformatted(std::format("build ( {} )", __DATE__).c_str());
+		ImGui::Checkbox("show menu", &vars::show_menu);
 
 		ImGui::Separator();
 
-		if (ImGui::Checkbox("edit mode", &vars::edit_mode_active))
-		{
-			if (!vars::edit_mode_active) {
-				vars::no_clip = false;
-			}
-		}
+		ImGui::Checkbox("show boss tracker", &vars::show_boss_tracker);
+
+		ImGui::Separator();
+
+		ImGui::Checkbox("allow cheating", &vars::allow_cheating);
 
 		ImGui::SameLine();
 
 		ImGui::TextDisabled("(?)");
 
-		if (ImGui::IsItemHovered())
-		{
-			ImGui::SetTooltip
-			(
-				"if you care about the current save file, back it up\n"
-				"save file friendly options are still available, even if this is disabled"
-			);
+		if (ImGui::IsItemHovered()) {
+			ImGui::SetTooltip("if you care about the current save file, back it up");
 		}
-
-		ImGui::Separator();
-
-		ImGui::Checkbox("show boss tracker", &vars::boss_tracker_active);
-
-		ImGui::Separator();
 
 		ImGui::End();
 	}
 
-	ImGui::SetNextWindowSize({ 550.0f, 400.0f });
-
-	if (ImGui::Begin("ERHooks", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize))
+	if (vars::show_menu)
 	{
-		MainWindow();
+		ImGui::SetNextWindowSize({ 550.0f, 400.0f });
 
-		ImGui::End();
+		if (ImGui::Begin("ERHooks", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize))
+		{
+			MainWindow();
+
+			ImGui::End();
+		}
 	}
 }

@@ -34,7 +34,7 @@ void BossTracker::DrawProgress(const er::bosses::boss_map_t &data, std::string_v
 		}
 	}
 
-	const float bar_w{ ImGui::GetIO().DisplaySize.x * 0.1f };
+	const float bar_w{ std::min(ImGui::GetIO().DisplaySize.x * 0.1f, 200.0f) };
 
 	TextOutlined(std::format("{} ( {} / {} )", name.data(), sum_defeated, sum));
 
@@ -70,9 +70,9 @@ void BossTracker::DrawProgress(const er::bosses::boss_map_t &data, std::string_v
 		{
 			ImGui::BeginTooltip();
 
-			ImGui::TextUnformatted(entry.first.c_str());
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 2.0f, 2.0f });
 
-			if (ImGui::BeginTable(entry.first.c_str(), 2, ImGuiTableFlags_Borders | ImGuiTableFlags_SizingStretchProp))
+			if (ImGui::BeginTable(entry.first.c_str(), 2, ImGuiTableFlags_BordersInnerH))
 			{
 				for (const auto &boss : entry.second)
 				{
@@ -92,6 +92,8 @@ void BossTracker::DrawProgress(const er::bosses::boss_map_t &data, std::string_v
 				ImGui::EndTable();
 			}
 
+			ImGui::PopStyleVar();
+
 			ImGui::EndTooltip();
 		}
 	}
@@ -99,7 +101,7 @@ void BossTracker::DrawProgress(const er::bosses::boss_map_t &data, std::string_v
 
 void BossTracker::Run()
 {
-	if (!er::InGame() || !Menu::IsOpen() || !vars::boss_tracker_active) {
+	if (!er::InGame() || !Menu::IsOpen() || !vars::show_boss_tracker) {
 		return;
 	}
 
