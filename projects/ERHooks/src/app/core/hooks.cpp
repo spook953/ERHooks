@@ -14,6 +14,7 @@ MAKE_HOOK(
 	{
 		Menu::Run();
 		BossTracker::Run();
+		Status::Run();
 
 		Renderer::End();
 	}

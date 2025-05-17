@@ -34,7 +34,7 @@ void BossTracker::DrawProgress(const er::bosses::boss_map_t &data, std::string_v
 		}
 	}
 
-	const float bar_w{ std::min(ImGui::GetIO().DisplaySize.x * 0.1f, 200.0f) };
+	const float bar_w{ std::min(ImGui::GetIO().DisplaySize.x * 0.125f, 210.0f) };
 
 	TextOutlined(std::format("{} ( {} / {} )", name.data(), sum_defeated, sum));
 

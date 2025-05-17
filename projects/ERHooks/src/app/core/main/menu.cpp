@@ -738,6 +738,10 @@ void Menu::Run()
 
 		ImGui::Separator();
 
+		ImGui::Checkbox("show status", &vars::show_status);
+
+		ImGui::Separator();
+
 		ImGui::Checkbox("allow cheating", &vars::allow_cheating);
 
 		ImGui::SameLine();
@@ -747,12 +751,13 @@ void Menu::Run()
 		if (ImGui::IsItemHovered()) {
 			ImGui::SetTooltip("if you care about the current save file, back it up");
 		}
-
+		
 		ImGui::End();
 	}
 
 	if (vars::show_menu)
 	{
+		ImGui::SetNextWindowPos({ 200.0f, 300.0f }, ImGuiCond_Once);
 		ImGui::SetNextWindowSize({ 550.0f, 400.0f });
 
 		if (ImGui::Begin("ERHooks", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize))

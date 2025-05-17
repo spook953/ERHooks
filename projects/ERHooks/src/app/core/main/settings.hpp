@@ -10,6 +10,7 @@ struct Settings final
 
 MAKE_VAR(show_menu, false);
 MAKE_VAR(show_boss_tracker, false);
+MAKE_VAR(show_status, false);
 MAKE_VAR(allow_cheating, false);
 
 MAKE_VAR(disable_chromatic_aberration, false);
