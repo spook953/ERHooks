@@ -6,6 +6,7 @@
 #include <intrin.h>
 #include <algorithm>
 #include <dxgi1_4.h>
+#include <array>
 
 #include "libs/libs.hpp"
 
