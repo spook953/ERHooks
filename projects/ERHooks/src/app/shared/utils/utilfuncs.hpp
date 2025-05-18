@@ -18,18 +18,18 @@ public:
 };
 
 template <typename T>
-class TempSet final
+class AutoRestore final
 {
 private:
 	T &var{};
 	T og_val{};
 
 public:
-	TempSet(T &var, const T new_val) : var(var), og_val(var) {
-		var = new_val;
-	}
+	AutoRestore(T &var) : var(var), og_val(var) {}
+	AutoRestore(T &var, const T new_val) : var(var), og_val(std::exchange(var, new_val)) {}
 
-	~TempSet() {
+public:
+	~AutoRestore() {
 		var = og_val;
 	}
 };
@@ -37,5 +37,5 @@ public:
 #define CONCATENATE_DETAIL(x, y) x##y
 #define CONCATENATE(x, y) CONCATENATE_DETAIL(x, y)
 
-#define TEMP_SET(var, val) const auto CONCATENATE(tmp_set_, __LINE__){ TempSet(var, val) }
-#define TEMP_SET_SELF(var) const auto CONCATENATE(backup_set_, __LINE__){ TempSet(var, var) }
+#define AUTO_RESTORE(var) const AutoRestore CONCATENATE(auto_restore_, __LINE__){ var }
+#define AUTO_RESTORE_SET(var, val) const AutoRestore CONCATENATE(auto_restore_, __LINE__){ var, val }

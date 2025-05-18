@@ -158,8 +158,8 @@ MAKE_HOOK(
 	__int64 a1, __int64 a2, unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6,
 	__int64 a7, __int64 a8, __int64 a9, __int64 a10, __int64 a11, __int64 a12, char a13, int a14)
 {
-	TEMP_SET_SELF(*reinterpret_cast<int *>(a1 + 216));
-	TEMP_SET_SELF(*reinterpret_cast<int *>(a1 + 272));
+	AUTO_RESTORE(*reinterpret_cast<int *>(a1 + 216));
+	AUTO_RESTORE(*reinterpret_cast<int *>(a1 + 272));
 
 	if (vars::disable_chromatic_aberration) {
 		*reinterpret_cast<int *>(a1 + 216) = 0;
@@ -296,7 +296,7 @@ MAKE_HOOK(
 	void *,
 	__int64 a1, __int64 a2, __int64 a3, __m128 *a4)
 {
-	TEMP_SET_SELF(*reinterpret_cast<float *>(a1 + 460));
+	AUTO_RESTORE(*reinterpret_cast<float *>(a1 + 460));
 
 	if (vars::cam_smooth_override_active) {
 		*reinterpret_cast<float *>(a1 + 460) = vars::cam_smooth_override_val;
