@@ -239,17 +239,14 @@ auto er_bosses_init_base_bosses_map = [&]()
 		{
 			"Mountaintops of the Giants",
 			{
-				{ 1050560800, "Great Wyrm Theodorix - Albinauric Rise" },
-				{ 1050570800, "Death Rite Bird - West of Castle Soul" },
-				{ 1051570800, "Commander Niall - Castle Soul" },
+				{ 1050570800, "Death Rite Bird - West of Castle Sol" },
+				{ 1051570800, "Commander Niall - Castle Sol" },
 				{ 1052520800, "Fire Giant - Giant's Forge" },
 				{ 1052560800, "Erdtree Avatar - Minor Erdtree" },
 				{ 1053560800, "Roundtable Knight Vyke - Lord Contender's Evergaol" },
-				{ 1248550800, "Night's Cavalry - Southwest" },
 				{ 1254560800, "Borealis the Freezing Fog - Freezing Fields" },
 				{ 30170800, "Ancient Hero of Zamor - Giant-Conquering Hero's Grave" },
 				{ 30180800, "Ulcerated Tree Sprit - Giants' Mountaintop Catacombs" },
-				{ 31120800, "Misbegotten Crusader - Cave of the Forlorn" },
 				{ 31220800, "Spirit-Caller Snail - Spiritcaller's Cave" }
 			}
 		},
@@ -269,7 +266,10 @@ auto er_bosses_init_base_bosses_map = [&]()
 				{ 1048570800, "Death Rite Bird - Ordina, Liturgical Town" },
 				{ 1050570850, "Putrid Avatar - Minor Erdtree" },
 				{ 30190800, "Putrid Grave Warden Duelist - Consecrated Snowfield Catacombs" },
-				{ 32110800, "Astel, Stars of Darkness - Yelough Anix Tunnel" }
+				{ 32110800, "Astel, Stars of Darkness - Yelough Anix Tunnel" },
+				{ 31120800, "Misbegotten Crusader - Cave of the Forlorn" },
+				{ 1248550800, "Night's Cavalry - Southwest" },
+				{ 1050560800, "Great Wyrm Theodorix - Albinauric Rise" }
 			}
 		},
 
