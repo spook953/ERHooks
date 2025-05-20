@@ -7,13 +7,10 @@ bool App::Run()
 
 	Process proc{};
 
-	if (!proc.Initialize(process_name))
-	{
-		Log::Msg("waiting for '{}'", process_name);
-
-		for (; !proc.Initialize(process_name);) {
-			continue;
-		}
+	if (!proc.Initialize(process_name)) {
+		Log::Err("'{}' not found", process_name);
+		std::cin.get();
+		return false;
 	}
 
 	if (!proc.Open()) {
