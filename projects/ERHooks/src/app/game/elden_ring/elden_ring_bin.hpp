@@ -10,10 +10,10 @@ MAKE_ADDR
 
 	MemUtils::FindPatMod(
 		"eldenring.exe",
-		"48 8B 0D ? ? ? ? 48 85 C9 74 17 B8 ? ? ? ? 89 44 24 20 80 B9 ? ? ? ? ?"
+		"48 8B 0D ? ? ? ? 48 8B 91 ? ? ? ? 44 0F B6 40 ?"
 	)
 
-	.Rip(3).Deref().Offset(0x90).Deref().Offset(0x30).Deref().Offset(0x60).Deref().Offset(0x110).Deref().Offset(0x8).Deref().Offset(0x10).Deref()
+	.Rip(3).Deref().Offset(296).Deref(3)
 );
 
 MAKE_ADDR
@@ -24,10 +24,10 @@ MAKE_ADDR
 
 	MemUtils::FindPatMod(
 		"eldenring.exe",
-		"48 8B 0D ? ? ? ? 0F 57 D2 66 0F 6E 44 24 ? 0F 57 C9 0F 5B C0"
+		"48 8D 05 ? ? ? ? C3 CC A9 ? ? ? ? 8B E2"
 	)
 
-	.Rip(3).Deref().Offset(0x8).Deref().Offset(0x8).Deref()
+	.Rip(3).Offset(8).Deref()
 );
 
 MAKE_ADDR
